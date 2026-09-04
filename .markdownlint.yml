@@ -1,0 +1,28 @@
+# See https://github.com/DavidAnson/markdownlint/blob/main/doc/Rules.md
+
+# Prose lines commonly exceed 80 chars (long links, wrapped sentences) -
+# wrapping isn't enforced anywhere else in the repo either.
+MD013: false
+
+# Posts use raw HTML (<section>, <details>, <iframe> for embeds) throughout.
+MD033: false
+
+# Scratch code fences (```scratch) use tabs for indentation to match
+# Scratch's own block nesting style.
+MD010:
+  code_blocks: false
+
+# Step headings end with "!" for a friendly, instructional tone
+# (e.g. "Add a block to fix the weird animation!") - only flag "."
+MD026:
+  punctuation: .
+
+# `{: .card-table}` kramdown IAL attributes must sit directly under a
+# table with no blank line to attach to it, which markdownlint's table
+# parser misreads as a malformed extra row. Tables also mix in emoji
+# (➡️, ⬅️) whose display width markdownlint's column-alignment check
+# gets wrong. Both cause false positives here rather than real issues.
+MD055: false
+MD056: false
+MD058: false
+MD060: false

@@ -1,0 +1,22 @@
+---
+layout: splash
+classes:
+  - wide
+---
+{% comment %}
+  Generic archive page listing posts for a single tag. Pages using this
+  layout must set `tag:` in their front matter (the tag slug to filter
+  posts by) and a human-readable `title:` (see _data/tags.yml for the
+  canonical title/URL for each tag).
+{% endcomment %}
+
+{% include next-club-banner.html %}
+
+<h1>{{ page.title }}</h1>
+
+<div class="entries-list">
+{% assign tagged_posts = site.posts | where_exp: "post", "post.tags contains page.tag" %}
+{% for post in tagged_posts %}
+  {% include archive-single.html %}
+{% endfor %}
+</div>

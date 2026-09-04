@@ -1,0 +1,16 @@
+# Display title and URL for each post tag. Used to:
+#  - label and link the coloured tag lozenges on post listings
+#    (see _includes/archive-single.html)
+#  - title the generated per-tag archive pages (see _layouts/tag-archive.html)
+project:
+  title: Projects
+  url: /tags/project
+scratch:
+  title: Scratch
+  url: /tags/scratch
+session:
+  title: Sessions
+  url: /tags/session
+how-to:
+  title: How-To Guides
+  url: /tags/how-to

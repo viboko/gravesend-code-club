@@ -1,0 +1,41 @@
+{% comment %}
+  Shared header for the post-based layouts (post, project, session):
+  renders the title with tag lozenges to its right and the formatted date
+  below, matching the archive list on the home page (see
+  archive-single.html, which this mirrors).
+{% endcomment %}
+{% assign day = page.date | date: "%-d" | plus: 0 %}
+{% assign day_mod_100 = day | modulo: 100 %}
+{% if day_mod_100 >= 11 and day_mod_100 <= 13 %}
+  {% assign suffix = "th" %}
+{% else %}
+  {% assign day_mod_10 = day | modulo: 10 %}
+  {% case day_mod_10 %}
+    {% when 1 %}{% assign suffix = "st" %}
+    {% when 2 %}{% assign suffix = "nd" %}
+    {% when 3 %}{% assign suffix = "rd" %}
+    {% else %}{% assign suffix = "th" %}
+  {% endcase %}
+{% endif %}
+{% assign weekday = page.date | date: "%A" %}
+{% assign month_year = page.date | date: "%B %Y" %}
+{% capture formatted_date %}{{ weekday }} {{ day }}{{ suffix }} {{ month_year }}{% endcapture %}
+
+<header class="post__header">
+  <div class="post__title-row">
+    <h1 class="page__title">{{ page.title }}</h1>
+    {% if page.tags %}
+      <ul class="post__tags">
+        {% for tag in page.tags %}
+          {% assign tag_info = site.data.tags[tag] %}
+          {% if tag_info.url %}
+            <li><a class="archive__item-tag archive__item-tag--{{ tag | slugify }}" href="{{ tag_info.url | relative_url }}">{{ tag }}</a></li>
+          {% else %}
+            <li class="archive__item-tag archive__item-tag--{{ tag | slugify }}">{{ tag }}</li>
+          {% endif %}
+        {% endfor %}
+      </ul>
+    {% endif %}
+  </div>
+  <time class="post__date" datetime="{{ page.date | date_to_xmlschema }}">{{ formatted_date }}</time>
+</header>

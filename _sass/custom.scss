@@ -1,0 +1,566 @@
+@use "sass:color";
+
+// The theme puts its focus ring on plain `a:focus`. Browsers re-apply
+// :focus to a link after you navigate back to the page it linked from,
+// so clicking a link then hitting the browser back button leaves that
+// outline box sitting round the link text with no keyboard involved.
+// :focus-visible is what browsers use to tell "focused because of
+// keyboard/programmatic navigation" apart from "focused because of a
+// mouse click", so scoping the ring to it keeps the indicator for
+// keyboard users while dropping it for this click-then-back case.
+a:focus {
+    outline: none;
+}
+
+a:focus-visible {
+    outline: 5px auto $focus-color;
+    outline-offset: -2px;
+}
+
+// Header ("masthead") - light text on a black background instead of the
+// theme's default grey-on-white.
+$masthead-background-color: #000;
+$masthead-text-color: #f5f5f5;
+$masthead-text-color-hover: #fff;
+
+.masthead,
+.greedy-nav,
+.greedy-nav .hidden-links {
+    background: $masthead-background-color;
+}
+
+.masthead {
+    border-bottom: 0;
+}
+
+.greedy-nav a {
+    color: $masthead-text-color;
+
+    &:hover {
+        color: $masthead-text-color-hover;
+    }
+}
+
+.navicon,
+.navicon::before,
+.navicon::after {
+    background: $masthead-text-color;
+}
+
+.greedy-nav__toggle:hover {
+    .navicon,
+    .navicon::before,
+    .navicon::after {
+        background: $masthead-text-color-hover;
+    }
+}
+
+.search__toggle {
+    color: $masthead-text-color;
+
+    &:hover {
+        color: $masthead-text-color-hover;
+    }
+}
+
+.page__footer-row {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+
+    .social-icons {
+        margin: 0;
+        padding: 0;
+        list-style-type: none;
+
+        li {
+            display: inline-block;
+        }
+
+        a {
+            font-size: 1.5em;
+            padding-inline-end: 0;
+        }
+    }
+}
+
+.page__hero--overlay {
+    // Fixed (not viewport-relative) padding, so the hero's height tracks
+    // its content instead of a min-height fighting the content for space -
+    // a min-height leaves excess padding whenever the content is short
+    // (e.g. the intro text fits on one line at wide viewports).
+    padding-block: 5em;
+    margin-bottom: 0;
+}
+
+// Nudged one step darker than the original #38AA48 - white text on the
+// original only reached 2.995:1, just short of the 3:1 large-text minimum.
+// See the pa11y-ci check in `just lint-pa11y`.
+$code-club-green: rgb(54 164 70);
+$scratch-orange: rgb(248 158 51);
+
+// A darker take on the theme's default link colour, for use on the site's
+// off-white card/callout backgrounds where the default falls just under a
+// 4.5:1 contrast ratio - see the pa11y-ci check in `just lint-pa11y`.
+$card-link-color: #2D768D;
+
+// A darker take on $code-club-green, for use as a fill behind white text
+// in smaller/normal-size text (e.g. table headers), which needs 4.5:1
+// rather than the 3:1 large-text minimum $code-club-green itself now
+// clears. Kept separate so contexts that pick their own text colour
+// (buttons, via yiq-contrasted) keep the brighter brand colour.
+$code-club-green-text-bg: #2C8639;
+
+.banner {
+    background: $lighter-gray;
+    position: relative;
+    left: 50%;
+    width: 100vw;
+    margin-left: -50vw;
+    margin-bottom: 2em;
+
+    &:hover {
+        background: color.mix(#000, $lighter-gray, 10%);
+    }
+}
+
+.banner-link {
+    position: absolute;
+    inset: 0;
+}
+
+.content {
+    margin-inline: auto;
+    padding-block: 1rem;
+    padding-inline: 1em;
+    max-width: 100%;
+
+    @include breakpoint($x-large) {
+        max-width: $max-width;
+    }
+}
+
+.banner .content {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 0.75em;
+}
+
+.banner .btn {
+    @include yiq-contrasted($code-club-green);
+}
+
+.content {
+    h1, h2, h3, h4, h5, h6 {
+        .header-link {
+            position: relative;
+            inset-inline-start: 0.5em;
+            opacity: 0;
+            font-size: 0.8em;
+            transition: opacity 0.2s ease-in-out 0.1s;
+        }
+
+        &:hover .header-link {
+            opacity: 1;
+        }
+    }
+}
+
+.btn--scratch {
+    // $scratch-orange only reaches 2.11:1 against white text, well short of
+    // the 3:1 large-text minimum, but a comfortable 9.93:1 against the
+    // theme's dark text colour - force that rather than trust
+    // yiq-contrasted's brightness heuristic, which picks white here. See
+    // the pa11y-ci check in `just lint-pa11y`.
+    @include yiq-contrasted($scratch-orange, $threshold: 0);
+
+    &:visited {
+        @include yiq-contrasted($scratch-orange, $threshold: 0);
+    }
+}
+
+.btn--code-club {
+    @include yiq-contrasted($code-club-green);
+
+    &:visited {
+        @include yiq-contrasted($code-club-green);
+    }
+}
+
+.faq {
+    details {
+        border: 1px solid $border-color;
+        border-radius: $border-radius;
+        padding: 0.75em 1em;
+        margin-bottom: 0.75em;
+
+        &[open] {
+            padding-bottom: 1em;
+        }
+
+        p {
+            margin-top: 0.75em;
+        }
+
+        p:last-child {
+            margin-bottom: 0;
+        }
+    }
+
+    summary {
+        cursor: pointer;
+        font-weight: bold;
+        list-style: none;
+
+        &::-webkit-details-marker {
+            display: none;
+        }
+
+        &::before {
+            content: "+";
+            display: inline-block;
+            width: 1em;
+            color: $code-club-green;
+        }
+    }
+
+    details[open] summary::before {
+        content: "\2013";
+    }
+}
+
+// A screenshot embedded in a how-to post. Full-width source images read as
+// oversized next to body text, so cap and centre them instead of letting
+// them run edge to edge.
+.how-to-image {
+    display: block;
+    max-width: min(100%, 500px);
+    margin-inline: auto;
+    margin-block: 1.5em;
+    border: 1px solid $border-color;
+    border-radius: $border-radius;
+}
+
+// Callout box for a message that needs to stand out from the surrounding
+// text, e.g. an "Important:" note. Colour is themeable per-variant; only
+// `--important` exists for now.
+.callout {
+    border: 1px solid;
+    border-inline-start-width: $border-radius * 2;
+    border-radius: $border-radius;
+    padding: 1em 1.25em;
+    margin-block: 1.5em;
+
+    // Kramdown wraps the callout's text in a `<p>`, which brings its own
+    // browser-default top margin on top of the box's own padding - zero it
+    // out (and the bottom one, in case of multiple paragraphs) so the
+    // padding alone controls the gap around the text.
+    > :first-child {
+        margin-top: 0;
+    }
+
+    > :last-child {
+        margin-bottom: 0;
+    }
+}
+
+.callout--important {
+    $callout-color: #d9822b;
+
+    border-color: color.mix(#000, $callout-color, 15%);
+    background: color.mix(#fff, $callout-color, 92%);
+
+    // The theme's default link colour falls just under 4.5:1 against this
+    // callout's off-white background - see the pa11y-ci check in `just
+    // lint-pa11y`. `:not(.btn)` keeps this from overriding the deliberate
+    // text colour on .btn--scratch/.btn--code-club links.
+    a:not(.btn) {
+        color: $card-link-color;
+    }
+}
+
+// Numbered cards for a short list of alternative options (e.g. "3 ways to
+// connect"), used instead of a plain ordered list so each option reads as
+// a separate, self-contained choice.
+.option-list {
+    counter-reset: option;
+    display: flex;
+    flex-direction: column;
+    gap: 1em;
+    margin-block: 1.5em;
+}
+
+.option-list__item {
+    counter-increment: option;
+    position: relative;
+    border: 1px solid $border-color;
+    border-radius: $border-radius * 2;
+    padding: 1.25em 1.25em 1.25em 3.25em;
+    background: $lighter-gray;
+
+    // See the matching override in .callout--important above.
+    a:not(.btn) {
+        color: $card-link-color;
+    }
+
+    &::before {
+        content: counter(option);
+        position: absolute;
+        top: 1.25em;
+        left: 1.25em;
+        width: 1.6em;
+        height: 1.6em;
+        border-radius: 50%;
+        background: $code-club-green;
+        color: #fff;
+        font-weight: bold;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    > :first-child {
+        margin-top: 0;
+    }
+
+    > :last-child {
+        margin-bottom: 0;
+    }
+}
+
+// A table shown inside an .option-list__item (e.g. dummy card numbers), so
+// it doesn't sit flush with the card's rounded edges.
+.card-table {
+    // The theme sets `table { display: block; }` for its own responsive
+    // scrolling behaviour, which makes plain `width: auto` fill the
+    // container (block sizing) instead of shrinking to fit the content
+    // like a normal table would.
+    width: fit-content;
+    max-width: 100%;
+    border-collapse: collapse;
+    overflow: hidden;
+    border-radius: $border-radius;
+    background: #fff;
+
+    th, td {
+        padding: 0.5em 0.9em;
+    }
+
+    th {
+        background: $code-club-green-text-bg;
+        color: #fff;
+    }
+
+    tbody tr:nth-child(even) {
+        background: color.mix($code-club-green, #fff, 8%);
+    }
+}
+
+// Header for the post-based layouts (post, project, session): title with
+// tag lozenges to the right and the date below, echoing the archive list
+// on the home page (see .entries-list below).
+.post__header {
+    // Extra breathing room above the title, on top of `.content`'s own
+    // top padding.
+    padding-top: 1.5rem;
+    margin-bottom: 1.5em;
+}
+
+.post__title-row {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 0.3em 0.6em;
+
+    .page__title {
+        margin: 0;
+    }
+}
+
+.post__tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.4em;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+
+    // `align-items: center` on `.post__title-row` centers this against the
+    // *line box*, but the title's ink is visually heavier below its
+    // vertical center than above it - barely noticeable at the archive
+    // list's smaller heading size, but obvious at the post title's much
+    // larger size, where it reads as the lozenges sitting too high. Nudge
+    // them down to compensate.
+    position: relative;
+    top: 0.15em;
+}
+
+.post__date {
+    display: block;
+    margin: 0.2em 0 0;
+    color: $muted-text-color;
+    font-size: $type-size-6;
+}
+
+.session__embed {
+    background: $lighter-gray;
+    border-radius: $border-radius * 2;
+    padding: 1.5em;
+    margin-bottom: 1.5em;
+
+    // See the matching override in .option-list__item above.
+    a:not(.btn) {
+        color: $card-link-color;
+    }
+
+    &:last-child {
+        margin-bottom: 0;
+    }
+}
+
+// Random-ish placeholder colours - tweak freely.
+$tag-colors: (
+    project: #0AB6FF,
+    scratch: $scratch-orange,
+    session: #7BC559,
+    how-to: #FFC800,
+);
+$tag-color-default: #3f88c5;
+$archive-bar-width: 16px;
+
+// Tag lozenge. Shared by the home page's entries list (`.archive__item-tags`)
+// and the post-based layouts' title row (`.post__tags`, post-header.html).
+
+// Nested under both container classes rather than written as the bare
+// `.archive__item-tag` class so the selectors have enough specificity to
+// beat the theme's own link-state rules: `a:visited` (which would otherwise
+// darken already-visited tag links) and `.page__content a:not(.btn):hover`
+// on the home/tag-archive pages (which would otherwise re-underline the
+// lozenge text on hover).
+.archive__item-tags,
+.post__tags {
+    .archive__item-tag {
+        display: inline-block;
+        background: $tag-color-default;
+
+        // Black rather than white text: none of the tag colours reach 3:1
+        // against white, but all comfortably clear it against black. See
+        // the pa11y-ci check in `just lint-pa11y`.
+        color: #000;
+        font-size: 0.85em;
+        font-weight: bold;
+        line-height: 1;
+        padding: 0.4em 0.8em;
+        border-radius: 999px;
+        text-decoration: none;
+        transition: opacity 0.15s ease, box-shadow 0.15s ease, transform 0.15s ease;
+
+        @each $tag, $color in $tag-colors {
+            &--#{$tag} {
+                background: $color;
+            }
+        }
+
+        &:hover,
+        &:focus {
+            color: #000;
+            opacity: 0.8;
+            box-shadow: 0 2px 6px rgba(#000, 0.3);
+            transform: translateY(-1px);
+        }
+    }
+
+    a.archive__item-tag:hover,
+    a.archive__item-tag:focus {
+        text-decoration: none;
+    }
+}
+
+.entries-list {
+    margin-top: 2em;
+
+    // Highlight the whole post block on hover instead of separating posts
+    // with a rule. The horizontal padding/negative margin pair lets the
+    // hover background bleed past the text without shifting anything
+    // when not hovered.
+    .list__item {
+        padding-block: 1em;
+        padding-inline: 1em;
+        margin-inline: -1em;
+        border-radius: $border-radius;
+        transition: background-color 0.15s ease;
+
+        &:hover {
+            background-color: $lighter-gray;
+        }
+    }
+
+    .archive__item {
+        position: relative;
+        padding-inline-start: calc(#{$archive-bar-width} + 0.75em);
+
+        // Coloured bar echoing the tag lozenge colours.
+        &::before {
+            content: "";
+            position: absolute;
+            inset-block: 0;
+            inset-inline-start: 0;
+            width: $archive-bar-width;
+            border-radius: 2px;
+            background: $tag-color-default;
+        }
+
+        @each $tag, $color in $tag-colors {
+            &--#{$tag}::before {
+                background: $color;
+            }
+        }
+    }
+
+    .archive__item-heading {
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+        gap: 0.3em 0.6em;
+    }
+
+    .archive__item-title {
+        margin: 0;
+
+        a {
+            // Pure black rather than the theme's default link colour, to
+            // match the tag lozenges' black text. Hover/focus keep the
+            // theme's usual $link-color-hover (set by the theme's base
+            // `a:hover` rule, not overridden here).
+            color: #000;
+            text-decoration: none;
+
+            &:hover,
+            &:focus {
+                text-decoration: none;
+            }
+        }
+    }
+
+    .archive__item-date {
+        display: block;
+        margin: 0 0 0.5em;
+        color: $muted-text-color;
+        font-size: $type-size-6;
+    }
+
+    .archive__item-tags {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.4em;
+        margin: 0;
+        padding: 0;
+        list-style: none;
+    }
+
+    .archive__item-excerpt {
+        margin: 0;
+    }
+}

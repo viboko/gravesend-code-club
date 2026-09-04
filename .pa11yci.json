@@ -1,0 +1,12 @@
+{
+  "defaults": {
+    "standard": "WCAG2AA",
+    "timeout": 30000,
+    "chromeLaunchConfig": {
+      "args": ["--no-sandbox"]
+    },
+    "ignore": [
+      "WCAG2AA.Principle4.Guideline4_1.4_1_1.F77"
+    ]
+  }
+}

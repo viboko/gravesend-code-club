@@ -1,0 +1,7 @@
+_site
+.DS_Store
+.claude/settings.local.json
+.claude/scheduled_tasks.lock
+node_modules
+vendor/bundle
+.lighthouseci

@@ -1,0 +1,16 @@
+---
+layout: default
+---
+{%- assign scratch_projects = page["scratch-projects"] -%}
+
+<div id="main" role="main" class="content">
+  {% include post-header.html %}
+
+  <p>This month there were {{ scratch_projects | size }} Scratch projects demoed at Code Club!</p>
+
+  {% for id in scratch_projects %}
+    <div class="session__embed">
+      {% include scratch-embed.html id=id %}
+    </div>
+  {% endfor %}
+</div>

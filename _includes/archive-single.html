@@ -1,0 +1,73 @@
+{% comment %}
+  Local override of minimal-mistakes' archive-single.html.
+  Renders each post as a simple list item: a heading row with the title
+  and the post's tags as coloured lozenges, then a readable date, then
+  preview text from the post's `excerpt` front matter. A coloured bar to
+  the left (keyed off the post's primary tag) echoes the lozenge colours.
+  No teaser images or per-layout header colours - the theme's
+  rel="permalink" link already makes the whole item clickable via its
+  ::before overlay.
+  See _sass/minimal-mistakes (remote theme) for the original this was
+  based on.
+{% endcomment %}
+{% assign locale = include.locale | default: site.locale %}
+
+{% if post.id %}
+  {% assign title = post.title | markdownify | remove: "<p>" | remove: "</p>" %}
+{% else %}
+  {% assign title = post.title %}
+{% endif %}
+
+{% assign day = post.date | date: "%-d" | plus: 0 %}
+{% assign day_mod_100 = day | modulo: 100 %}
+{% if day_mod_100 >= 11 and day_mod_100 <= 13 %}
+  {% assign suffix = "th" %}
+{% else %}
+  {% assign day_mod_10 = day | modulo: 10 %}
+  {% case day_mod_10 %}
+    {% when 1 %}{% assign suffix = "st" %}
+    {% when 2 %}{% assign suffix = "nd" %}
+    {% when 3 %}{% assign suffix = "rd" %}
+    {% else %}{% assign suffix = "th" %}
+  {% endcase %}
+{% endif %}
+{% assign weekday = post.date | date: "%A" %}
+{% assign month_year = post.date | date: "%B %Y" %}
+{% capture formatted_date %}{{ weekday }} {{ day }}{{ suffix }} {{ month_year }}{% endcapture %}
+
+{% assign primary_tag = nil %}
+{% if post.tags contains 'project' %}
+  {% assign primary_tag = 'project' %}
+{% elsif post.tags contains 'session' %}
+  {% assign primary_tag = 'session' %}
+{% elsif post.tags contains 'how-to' %}
+  {% assign primary_tag = 'how-to' %}
+{% endif %}
+
+<div class="{{ include.type | default: 'list' }}__item">
+  <article class="archive__item{% if primary_tag %} archive__item--{{ primary_tag }}{% endif %}" itemscope itemtype="https://schema.org/CreativeWork"{% if post.locale %} lang="{{ post.locale }}"{% endif %}>
+    <div class="archive__item-heading">
+      <h2 class="archive__item-title no_toc p-name" itemprop="headline">
+        {% if post.link %}
+          <a href="{{ post.link }}">{{ title }}</a> <a class="u-url" href="{{ post.url | relative_url }}" rel="permalink"><i class="fas fa-link" aria-hidden="true" title="permalink"></i><span class="sr-only">Permalink</span></a>
+        {% else %}
+          <a class="u-url" href="{{ post.url | relative_url }}" rel="permalink">{{ title }}</a>
+        {% endif %}
+      </h2>
+      {% if post.tags %}
+        <ul class="archive__item-tags">
+          {% for tag in post.tags %}
+            {% assign tag_info = site.data.tags[tag] %}
+            {% if tag_info.url %}
+              <li><a class="archive__item-tag archive__item-tag--{{ tag | slugify }}" href="{{ tag_info.url | relative_url }}">{{ tag }}</a></li>
+            {% else %}
+              <li class="archive__item-tag archive__item-tag--{{ tag | slugify }}">{{ tag }}</li>
+            {% endif %}
+          {% endfor %}
+        </ul>
+      {% endif %}
+    </div>
+    <time class="archive__item-date" datetime="{{ post.date | date_to_xmlschema }}">{{ formatted_date }}</time>
+    {% if post.excerpt %}<p class="archive__item-excerpt p-summary" itemprop="description">{{ post.excerpt | markdownify | strip_html | truncate: 160 }}</p>{% endif %}
+  </article>
+</div>

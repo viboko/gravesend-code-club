@@ -1,0 +1,27 @@
+{%- assign event_date = site.code_club.next_date -%}
+{%- assign day = event_date | date: "%-d" | plus: 0 -%}
+{%- assign day_mod_100 = day | modulo: 100 -%}
+{%- if day_mod_100 >= 11 and day_mod_100 <= 13 -%}
+  {%- assign suffix = "th" -%}
+{%- else -%}
+  {%- assign day_mod_10 = day | modulo: 10 -%}
+  {%- case day_mod_10 -%}
+    {%- when 1 -%}{%- assign suffix = "st" -%}
+    {%- when 2 -%}{%- assign suffix = "nd" -%}
+    {%- when 3 -%}{%- assign suffix = "rd" -%}
+    {%- else -%}{%- assign suffix = "th" -%}
+  {%- endcase -%}
+{%- endif -%}
+{%- assign month_year = event_date | date: "%B %Y" -%}
+{%- assign formatted_date = day | append: suffix | append: " " | append: month_year -%}
+{%- assign hide_after = event_date | date: "%Y-%m-%dT23:59:59+01:00" -%}
+
+<div class="banner" id="banner" data-hide-after="{{ hide_after }}">
+  <a class="banner-link" href="{{ site.code_club.signup_url }}" target="_blank" rel="noopener" aria-label="Sign up for the next Code Club, {{ formatted_date }}"></a>
+  <div class="content">
+    <span>Next Code Club: <b>{{ formatted_date }}</b></span>
+    <span class="btn btn--large">Sign up</span>
+  </div>
+</div>
+
+<script src="{{ '/assets/js/next-club-banner.js' | relative_url }}"></script>

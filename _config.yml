@@ -1,0 +1,24 @@
+title: Gravesend Code Club
+description: Resources for Gravesend Code Club
+url: "https://gravesend-code-club.viboko.dev"
+author:
+  name: Matthew Hasler
+
+remote_theme: mmistakes/minimal-mistakes
+minimal_mistakes_skin: default
+
+plugins:
+  - jekyll-remote-theme
+  - jekyll-include-cache
+  - jekyll-feed
+  - jekyll-sitemap
+
+markdown: kramdown
+
+# Blog settings
+permalink: /:year/:month/:day/:title
+
+# Next Code Club session, shown in the site banner (see _includes/next-club-banner.html)
+code_club:
+  next_date: 2026-09-12
+  signup_url: "https://codeclub.org/en/clubs/3dc59716-415e-4837-b494-2b438ef63b65"
