@@ -1,5 +1,10 @@
 @use "sass:color";
 
+// Shared with the .callout--important and card-link-color rules below -
+// pulled up here so it's available while building the --color-callout-*
+// custom properties.
+$callout-color: #d9822b;
+
 // Core palette as CSS custom properties (not Sass variables) so the page
 // can react to the visitor's OS/browser dark-mode setting at paint time,
 // with no JS. Light-mode values below are the default-skin's own colours,
@@ -37,10 +42,20 @@
     // directly on --color-bg, so it has to flip with the page background.
     --color-archive-title: #000;
 
-    // .callout--important mixes toward literal white (see below), so it
-    // keeps a light background in both modes and needs a text colour
-    // that's pinned rather than following --color-text.
-    --color-callout-text: #3d4144;
+    // .callout--important's background/border/link colour - kept as
+    // variables (rather than computed inline in the selector) because the
+    // dark-mode version isn't a simple mix toward the same white/black
+    // endpoint, it needs its own ratio to stay readable (see the dark
+    // block below).
+    --color-callout-bg: #{color.mix(#fff, $callout-color, 92%)};
+    --color-callout-border: #{color.mix(#000, $callout-color, 15%)};
+
+    // Darker than the theme's default link colour ($link-color, used by
+    // plain `a` above): that falls just under 4.5:1 against this callout's
+    // off-white background - see the pa11y-ci check in `just lint-pa11y`.
+    // Also used by .option-list__item and .session__embed below, whose
+    // card backgrounds need the same treatment.
+    --color-card-link: #2d768d;
 }
 
 @media (prefers-color-scheme: dark) {
@@ -56,6 +71,19 @@
         --color-surface-hover: #{color.mix(#fff, #262b30, 10%)};
         --color-table-stripe: #{color.mix(#36a446, #1b1f24, 8%)};
         --color-archive-title: #fff;
+
+        // Mixed toward black rather than white here (the light-mode
+        // background above mixes toward white), so the panel stays dark
+        // enough for --color-text's light dark-mode value to read against
+        // it, while still visibly warm/orange rather than reading as a
+        // plain dark-surface card.
+        --color-callout-bg: #{color.mix(#000, $callout-color, 60%)};
+        --color-callout-border: #{$callout-color};
+
+        // --color-card-link's light value falls under 3:1 against this
+        // dark background - reuse --color-link's own dark-mode value,
+        // which clears 4.5:1 against both this and --color-surface below.
+        --color-card-link: #7fb8d8;
     }
 }
 
@@ -232,11 +260,6 @@ a:focus-visible {
 $code-club-green: rgb(54 164 70);
 $scratch-orange: rgb(248 158 51);
 
-// A darker take on the theme's default link colour, for use on the site's
-// off-white card/callout backgrounds where the default falls just under a
-// 4.5:1 contrast ratio - see the pa11y-ci check in `just lint-pa11y`.
-$card-link-color: #2D768D;
-
 // A darker take on $code-club-green, for use as a fill behind white text
 // in smaller/normal-size text (e.g. table headers), which needs 4.5:1
 // rather than the 3:1 large-text minimum $code-club-green itself now
@@ -400,23 +423,15 @@ $code-club-green-text-bg: #2C8639;
 }
 
 .callout--important {
-    $callout-color: #d9822b;
+    border-color: var(--color-callout-border);
+    background: var(--color-callout-bg);
+    color: var(--color-text);
 
-    border-color: color.mix(#000, $callout-color, 15%);
-    background: color.mix(#fff, $callout-color, 92%);
-
-    // Mixed toward literal white above, so this box keeps a light
-    // background in both modes - pin the text colour rather than letting
-    // it follow --color-text, which turns light in dark mode and would
-    // otherwise become unreadable against this permanently-light background.
-    color: var(--color-callout-text);
-
-    // The theme's default link colour falls just under 4.5:1 against this
-    // callout's off-white background - see the pa11y-ci check in `just
-    // lint-pa11y`. `:not(.btn)` keeps this from overriding the deliberate
-    // text colour on .btn--scratch/.btn--code-club links.
+    // `:not(.btn)` keeps this from overriding the deliberate text colour
+    // on .btn--scratch/.btn--code-club links. See --color-card-link above
+    // for why this isn't the theme's default link colour.
     a:not(.btn) {
-        color: $card-link-color;
+        color: var(--color-card-link);
     }
 }
 
@@ -441,7 +456,7 @@ $code-club-green-text-bg: #2C8639;
 
     // See the matching override in .callout--important above.
     a:not(.btn) {
-        color: $card-link-color;
+        color: var(--color-card-link);
     }
 
     &::before {
@@ -551,7 +566,7 @@ $code-club-green-text-bg: #2C8639;
 
     // See the matching override in .option-list__item above.
     a:not(.btn) {
-        color: $card-link-color;
+        color: var(--color-card-link);
     }
 
     &:last-child {
