@@ -1,5 +1,140 @@
 @use "sass:color";
 
+// Core palette as CSS custom properties (not Sass variables) so the page
+// can react to the visitor's OS/browser dark-mode setting at paint time,
+// with no JS. Light-mode values below are the default-skin's own colours,
+// read off the compiled output in `_site/assets/css/main.css` (the theme
+// never exposes these as CSS variables itself).
+:root {
+    --color-bg: #fff;
+    --color-text: #3d4144;
+    --color-text-muted: #646769;
+    --color-link: #2f7d95;
+    --color-link-hover: #235e70;
+    --color-link-visited: #4e90a5;
+    --color-border: #f2f3f3;
+    --color-border-strong: #6f777d;
+    --color-surface: #f2f3f3;
+    --color-surface-hover: #{color.mix(#000, #f2f3f3, 10%)};
+    --color-table-stripe: #{color.mix(#36a446, #fff, 8%)};
+
+    // Already permanently dark regardless of skin (see .masthead below) -
+    // named as variables anyway so this file has one consistent way of
+    // spelling colors, not so they change under dark mode.
+    --color-masthead-bg: #000;
+    --color-masthead-text: #f5f5f5;
+    --color-masthead-text-hover: #fff;
+
+    // Tag lozenge text stays black in both modes - the lozenge background
+    // colors ($tag-colors below) don't change, and all of them were
+    // checked for contrast against black, not white (see the pa11y-ci
+    // check in `just lint-pa11y`).
+    --color-tag-text: #000;
+
+    // Archive-list post title text - separate from --color-tag-text above
+    // even though both are black in light mode: the lozenge stays black
+    // regardless of mode (its background doesn't change), but this sits
+    // directly on --color-bg, so it has to flip with the page background.
+    --color-archive-title: #000;
+
+    // .callout--important mixes toward literal white (see below), so it
+    // keeps a light background in both modes and needs a text colour
+    // that's pinned rather than following --color-text.
+    --color-callout-text: #3d4144;
+}
+
+@media (prefers-color-scheme: dark) {
+    :root {
+        --color-bg: #1b1f24;
+        --color-text: #dcdfe2;
+        --color-text-muted: #9aa1a8;
+        --color-link: #7fb8d8;
+        --color-link-hover: #fff;
+        --color-link-visited: #b7d4e6;
+        --color-border: #333a40;
+        --color-surface: #262b30;
+        --color-surface-hover: #{color.mix(#fff, #262b30, 10%)};
+        --color-table-stripe: #{color.mix(#36a446, #1b1f24, 8%)};
+        --color-archive-title: #fff;
+    }
+}
+
+// `html` gets its own background too, not just `body`: `.page__footer` is
+// floated (see the theme's own float rules), which on short pages can
+// leave part of `body`'s box not extending as far down as the visible
+// page - without this, that gap shows `html`'s own hardcoded white
+// background through underneath the (correctly dark) footer.
+html {
+    background: var(--color-bg);
+}
+
+body {
+    background: var(--color-bg);
+    color: var(--color-text);
+}
+
+a {
+    color: var(--color-link);
+
+    &:hover {
+        color: var(--color-link-hover);
+    }
+}
+
+a:visited {
+    color: var(--color-link-visited);
+}
+
+// These are the theme selectors that actually carry a border in the
+// compiled default-skin CSS (all the same rgb(94.78%, 95.1%, 95.33%) =
+// --color-border value) - `.archive__item`/`.page__footer` themselves
+// carry no border property, so overriding border-color on them would be a
+// no-op.
+hr,
+.page__content h2,
+thead,
+td {
+    border-color: var(--color-border);
+}
+
+thead {
+    background-color: var(--color-border);
+}
+
+blockquote {
+    border-inline-start-color: var(--color-border-strong);
+}
+
+.notice,
+.notice--primary,
+.notice--info,
+.notice--warning,
+.notice--success,
+.notice--danger {
+    background-color: var(--color-surface);
+    color: var(--color-text);
+}
+
+// Everywhere the theme uses its own $muted-text-color (page meta, footer,
+// archive subtitle - `.post__date`/`.archive__item-date` below are ours
+// and get the same treatment further down) - all bake to the same
+// light-mode grey, which drops to unreadable contrast against
+// --color-bg's dark-mode value if left unoverridden.
+.page__footer,
+.page__meta,
+.comment__date,
+.archive__subtitle {
+    color: var(--color-text-muted);
+}
+
+// The theme also gives .page__footer a light grey panel background (the
+// same rgb(94.78%, 95.1%, 95.33%) as --color-surface) - left alone this
+// stays light-grey-on-dark-page in dark mode, which reads as a mistake
+// rather than an intentional panel.
+.page__footer {
+    background-color: var(--color-surface);
+}
+
 // The theme puts its focus ring on plain `a:focus`. Browsers re-apply
 // :focus to a link after you navigate back to the page it linked from,
 // so clicking a link then hitting the browser back button leaves that
@@ -18,15 +153,13 @@ a:focus-visible {
 }
 
 // Header ("masthead") - light text on a black background instead of the
-// theme's default grey-on-white.
-$masthead-background-color: #000;
-$masthead-text-color: #f5f5f5;
-$masthead-text-color-hover: #fff;
-
+// theme's default grey-on-white. Colors come from --color-masthead-* above;
+// they're permanently dark (not mode-dependent), the header already looked
+// like this before dark mode existed.
 .masthead,
 .greedy-nav,
 .greedy-nav .hidden-links {
-    background: $masthead-background-color;
+    background: var(--color-masthead-bg);
 }
 
 .masthead {
@@ -34,32 +167,32 @@ $masthead-text-color-hover: #fff;
 }
 
 .greedy-nav a {
-    color: $masthead-text-color;
+    color: var(--color-masthead-text);
 
     &:hover {
-        color: $masthead-text-color-hover;
+        color: var(--color-masthead-text-hover);
     }
 }
 
 .navicon,
 .navicon::before,
 .navicon::after {
-    background: $masthead-text-color;
+    background: var(--color-masthead-text);
 }
 
 .greedy-nav__toggle:hover {
     .navicon,
     .navicon::before,
     .navicon::after {
-        background: $masthead-text-color-hover;
+        background: var(--color-masthead-text-hover);
     }
 }
 
 .search__toggle {
-    color: $masthead-text-color;
+    color: var(--color-masthead-text);
 
     &:hover {
-        color: $masthead-text-color-hover;
+        color: var(--color-masthead-text-hover);
     }
 }
 
@@ -112,7 +245,7 @@ $card-link-color: #2D768D;
 $code-club-green-text-bg: #2C8639;
 
 .banner {
-    background: $lighter-gray;
+    background: var(--color-surface);
     position: relative;
     left: 50%;
     width: 100vw;
@@ -120,7 +253,7 @@ $code-club-green-text-bg: #2C8639;
     margin-bottom: 2em;
 
     &:hover {
-        background: color.mix(#000, $lighter-gray, 10%);
+        background: var(--color-surface-hover);
     }
 }
 
@@ -191,7 +324,7 @@ $code-club-green-text-bg: #2C8639;
 
 .faq {
     details {
-        border: 1px solid $border-color;
+        border: 1px solid var(--color-border);
         border-radius: $border-radius;
         padding: 0.75em 1em;
         margin-bottom: 0.75em;
@@ -239,7 +372,7 @@ $code-club-green-text-bg: #2C8639;
     max-width: min(100%, 500px);
     margin-inline: auto;
     margin-block: 1.5em;
-    border: 1px solid $border-color;
+    border: 1px solid var(--color-border);
     border-radius: $border-radius;
 }
 
@@ -272,6 +405,12 @@ $code-club-green-text-bg: #2C8639;
     border-color: color.mix(#000, $callout-color, 15%);
     background: color.mix(#fff, $callout-color, 92%);
 
+    // Mixed toward literal white above, so this box keeps a light
+    // background in both modes - pin the text colour rather than letting
+    // it follow --color-text, which turns light in dark mode and would
+    // otherwise become unreadable against this permanently-light background.
+    color: var(--color-callout-text);
+
     // The theme's default link colour falls just under 4.5:1 against this
     // callout's off-white background - see the pa11y-ci check in `just
     // lint-pa11y`. `:not(.btn)` keeps this from overriding the deliberate
@@ -295,10 +434,10 @@ $code-club-green-text-bg: #2C8639;
 .option-list__item {
     counter-increment: option;
     position: relative;
-    border: 1px solid $border-color;
+    border: 1px solid var(--color-border);
     border-radius: $border-radius * 2;
     padding: 1.25em 1.25em 1.25em 3.25em;
-    background: $lighter-gray;
+    background: var(--color-surface);
 
     // See the matching override in .callout--important above.
     a:not(.btn) {
@@ -342,7 +481,7 @@ $code-club-green-text-bg: #2C8639;
     border-collapse: collapse;
     overflow: hidden;
     border-radius: $border-radius;
-    background: #fff;
+    background: var(--color-bg);
 
     th, td {
         padding: 0.5em 0.9em;
@@ -354,7 +493,7 @@ $code-club-green-text-bg: #2C8639;
     }
 
     tbody tr:nth-child(even) {
-        background: color.mix($code-club-green, #fff, 8%);
+        background: var(--color-table-stripe);
     }
 }
 
@@ -400,12 +539,12 @@ $code-club-green-text-bg: #2C8639;
 .post__date {
     display: block;
     margin: 0.2em 0 0;
-    color: $muted-text-color;
+    color: var(--color-text-muted);
     font-size: $type-size-6;
 }
 
 .session__embed {
-    background: $lighter-gray;
+    background: var(--color-surface);
     border-radius: $border-radius * 2;
     padding: 1.5em;
     margin-bottom: 1.5em;
@@ -446,9 +585,10 @@ $archive-bar-width: 16px;
         background: $tag-color-default;
 
         // Black rather than white text: none of the tag colours reach 3:1
-        // against white, but all comfortably clear it against black. See
-        // the pa11y-ci check in `just lint-pa11y`.
-        color: #000;
+        // against white, but all comfortably clear it against black. Stays
+        // black in dark mode too - see --color-tag-text above. See the
+        // pa11y-ci check in `just lint-pa11y`.
+        color: var(--color-tag-text);
         font-size: 0.85em;
         font-weight: bold;
         line-height: 1;
@@ -465,7 +605,7 @@ $archive-bar-width: 16px;
 
         &:hover,
         &:focus {
-            color: #000;
+            color: var(--color-tag-text);
             opacity: 0.8;
             box-shadow: 0 2px 6px rgba(#000, 0.3);
             transform: translateY(-1px);
@@ -493,7 +633,7 @@ $archive-bar-width: 16px;
         transition: background-color 0.15s ease;
 
         &:hover {
-            background-color: $lighter-gray;
+            background-color: var(--color-surface-hover);
         }
     }
 
@@ -530,11 +670,13 @@ $archive-bar-width: 16px;
         margin: 0;
 
         a {
-            // Pure black rather than the theme's default link colour, to
-            // match the tag lozenges' black text. Hover/focus keep the
-            // theme's usual $link-color-hover (set by the theme's base
-            // `a:hover` rule, not overridden here).
-            color: #000;
+            // Black in light mode to match the tag lozenges' text colour,
+            // rather than the theme's default link colour - but this sits
+            // on the page background rather than a lozenge, so it flips to
+            // white in dark mode (see --color-archive-title above).
+            // Hover/focus keep the theme's usual $link-color-hover (set by
+            // the theme's base `a:hover` rule, not overridden here).
+            color: var(--color-archive-title);
             text-decoration: none;
 
             &:hover,
@@ -547,7 +689,7 @@ $archive-bar-width: 16px;
     .archive__item-date {
         display: block;
         margin: 0 0 0.5em;
-        color: $muted-text-color;
+        color: var(--color-text-muted);
         font-size: $type-size-6;
     }
 
