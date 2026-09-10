@@ -2,6 +2,7 @@
 layout: default
 ---
 {%- assign scratch_projects = page["scratch-projects"] -%}
+{%- assign microbit_projects = page["microbit-projects"] -%}
 
 <div id="main" role="main" class="content">
   {% include post-header.html %}
@@ -13,4 +14,14 @@ layout: default
       {% include scratch-embed.html id=id %}
     </div>
   {% endfor %}
+
+  {% if microbit_projects and microbit_projects.size > 0 %}
+    <p>There were also {{ microbit_projects | size }} micro:bit projects!</p>
+
+    {% for id in microbit_projects %}
+      <div class="session__embed">
+        {% include microbit-embed.html id=id %}
+      </div>
+    {% endfor %}
+  {% endif %}
 </div>
