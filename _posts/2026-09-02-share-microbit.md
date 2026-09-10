@@ -8,24 +8,24 @@ published: true
 ---
 
 <div class="callout callout--important" markdown="1">
-**Note:** There is no need to have a MakeCode account to share your project. 
+**Note:** There is no need to have a MakeCode account to share your project.
 </div>
 
-## Step 1: Click share
+## 📤 Step 1: Click share
 
 Click the share icon in the top-right of the screen.
 
-![todo](/assets/img/share-microbit/share-icon.png){: .how-to-image}
+![The MakeCode editor, with the share icon highlighted](/assets/img/share-microbit/share-icon.webp){: .how-to-image}
 
 Check that you are happy with your project name and click **Share Project**.
 
-## Step 2: Share the link
+## 🔗 Step 2: Share the link
 
-You need to share the link that comes up so you’re ready to demo it at the end of the session
+You need to share the link that comes up so you’re ready to demo it at the end of the session.
 
-![todo](/assets/img/share-microbit/share-project.png){: .how-to-image}
+![The Share Project dialog, showing the project link and QR code](/assets/img/share-microbit/share-project.webp){: .how-to-image}
 
-You could either: 
+You could either:
 
 * Email the link to [codeclub@viboko.dev](mailto:codeclub@viboko.dev)
 * Let someone scan the QR code shown on the screen
