@@ -358,6 +358,17 @@ $code-club-green-text-bg: #2C8639;
     &:visited {
         @include yiq-contrasted($microbit-purple);
     }
+
+    // Without this, the theme's own `a:hover` rule at the top of this file
+    // (a class+pseudo-class selector, so more specific than the single
+    // `.btn--microbit` class above) would win on hover and swap the text
+    // to --color-link-hover - a dark teal that reads poorly against this
+    // purple. Reusing --color-masthead-text here only for its off-white
+    // value, not because it's semantically a masthead colour, keeps a
+    // visible hover state without losing contrast.
+    &:hover {
+        color: var(--color-masthead-text);
+    }
 }
 
 .faq {
