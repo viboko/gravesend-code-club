@@ -11,7 +11,9 @@ excerpt: >
 header:
   overlay_image: /assets/img/hero.webp
   overlay_filter: 0.4
-  
+  og_image: /assets/img/social-preview.png
+  og_image_alt: Gravesend Code Club logo
+
   actions:
     - label: "Projects"
       url: /tags/project

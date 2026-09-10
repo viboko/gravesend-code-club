@@ -4,6 +4,11 @@ url: "https://gravesend-code-club.viboko.dev"
 author:
   name: Matthew Hasler
 
+# Used as the link-preview (Open Graph) image for any page that doesn't set
+# its own header image, e.g. blog posts and the about page.
+og_image: /assets/img/social-preview.png
+og_image_alt: Gravesend Code Club logo
+
 remote_theme: mmistakes/minimal-mistakes
 minimal_mistakes_skin: default
 
