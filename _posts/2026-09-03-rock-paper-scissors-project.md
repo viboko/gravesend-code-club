@@ -2,8 +2,8 @@
 title: Rock! Paper! Scissors!
 layout: project
 date: 2026-09-03
-tags: [microbit, project]
-excerpt: "Turn a micro:bit into an expert Rock, Paper, Scissors player."
+tags: [micro:bit, project]
+excerpt: "Turn your micro:bit into an expert Rock, Paper, Scissors player."
 ---
 
 <div class="callout callout--important" markdown="1">

@@ -2,7 +2,7 @@
 title: Connect your micro:bit
 layout: post
 date: 2026-09-01
-tags: [microbit, how-to]
+tags: [micro:bit, how-to]
 excerpt: "How to connect a micro:bit and get set up ready to start coding."
 published: true
 ---

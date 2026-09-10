@@ -1,6 +1,6 @@
 ---
 layout: tag-archive
 title: micro:bit
-tag: microbit
+tag: micro:bit
 permalink: /tags/microbit
 ---
