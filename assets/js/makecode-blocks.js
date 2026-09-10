@@ -2,7 +2,12 @@
     "use strict";
 
     const makeCodeUrl = "https://makecode.microbit.org/";
-    const selector = "div.language-makecode pre";
+    // Kramdown renders a ```makecode fenced block as a plain
+    // <pre><code class="language-makecode">, the same as scratchblocks.js's
+    // ```scratch blocks - not wrapped in a `div.language-makecode` (that
+    // wrapping only happens for languages Jekyll's Rouge highlighter
+    // recognises, which "makecode" isn't).
+    const selector = "pre > code.language-makecode";
 
     let renderer;
     let nextId = 0;
@@ -15,6 +20,7 @@
 
         renderer.id = "makecoderenderer";
         renderer.src = makeCodeUrl + "--docs?render=1";
+        renderer.title = "MakeCode block renderer";
 
         renderer.style.position = "absolute";
         renderer.style.left = "0";
@@ -29,7 +35,8 @@
     /*
      * Ask MakeCode to render one snippet.
      */
-    function renderSnippet(pre) {
+    function renderSnippet(code) {
+        const pre = code.parentElement;
         const id = "makecode-snippet-" + (nextId++);
 
         pre.id = id;
@@ -37,7 +44,7 @@
         renderer.contentWindow.postMessage({
             type: "renderblocks",
             id: id,
-            code: pre.textContent
+            code: code.textContent
         }, makeCodeUrl);
     }
 
