@@ -12,9 +12,7 @@ excerpt: "Turn your micro:bit into an expert Rock, Paper, Scissors player."
 Important! Before you get started, make sure your micro:bit is connected to your computer: [Connect your micro:bit]({% link _posts/2026-09-01-connect-microbit.md %})
 </div>
 
-## 🎮 What you will make
-
-{% include microbit-embed.html id="_gAg42F0RuVm4" ratio="145%" %}
+{% include microbit-embed.html id="_gAg42F0RuVm4" %}
 
 ---
 

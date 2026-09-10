@@ -1,28 +1,15 @@
 {% comment %}
-  Embeds a MakeCode micro:bit project's live simulator, given the code from
-  its share link (include.id, e.g. "_gAg42F0RuVm4"). Mirrors scratch-embed.html.
-
-  MakeCode's simulator has no fixed aspect ratio - it sizes its own
-  `.simframe` element with a `padding-bottom` percentage computed at
-  runtime, which grows taller for a project that attaches extra simulator
-  parts (e.g. the external speaker some music blocks show) than for a
-  bare board. 145% (include.ratio) is measured against a project with an
-  attached part; for a bare-board project, pass a smaller include.ratio
-  (find the exact figure by opening the project's own
-  https://makecode.microbit.org/---run?id=<id> page and inspecting its
-  `.simframe` element's inline style) or accept the extra blank space
-  below the board - better than the board being cut off, which is what an
-  undersized ratio does.
+  Links to a MakeCode micro:bit project via its share link (include.id,
+  e.g. "_gAg42F0RuVm4"). Mirrors scratch-embed.html's "See in Scratch"
+  button - but MakeCode's simulator has no fixed aspect ratio (it
+  computes its own height at runtime, and grows taller for a project
+  that attaches extra simulator parts than for a bare board), so an
+  embedded iframe either gets cut off or leaves a lot of blank space
+  depending on the project. A link out is more reliable than an embed
+  here.
 {% endcomment %}
 <div class="no-print">
-    <div style="position:relative;height:0;padding-bottom:{{ include.ratio | default: "145%" }};overflow:hidden;">
-        <iframe
-            style="position:absolute;top:0;left:0;width:100%;height:100%;"
-            src="https://makecode.microbit.org/---run?id={{ include.id }}"
-            allowfullscreen
-            sandbox="allow-popups allow-forms allow-scripts allow-same-origin"
-            frameborder="0"
-            title="MakeCode project {{ include.id }}">
-        </iframe>
-    </div>
+    <p>
+        <a href="https://makecode.microbit.org/{{ include.id }}" class="btn btn--large btn--microbit">See in MakeCode</a>
+    </p>
 </div>

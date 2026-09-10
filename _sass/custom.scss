@@ -347,6 +347,19 @@ $code-club-green-text-bg: #2C8639;
     }
 }
 
+.btn--microbit {
+    // Unlike $scratch-orange above, yiq-contrasted's default heuristic
+    // already picks white here, which is also the right call on contrast
+    // grounds (white reaches ~7.4:1 against $microbit-purple, comfortably
+    // clearing the 4.5:1 minimum) - see the pa11y-ci check in
+    // `just lint-pa11y`.
+    @include yiq-contrasted($microbit-purple);
+
+    &:visited {
+        @include yiq-contrasted($microbit-purple);
+    }
+}
+
 .faq {
     details {
         border: 1px solid var(--color-border);
