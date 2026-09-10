@@ -259,6 +259,7 @@ a:focus-visible {
 // See the pa11y-ci check in `just lint-pa11y`.
 $code-club-green: rgb(54 164 70);
 $scratch-orange: rgb(248 158 51);
+$microbit-purple: rgb(96,54,197);
 
 // A darker take on $code-club-green, for use as a fill behind white text
 // in smaller/normal-size text (e.g. table headers), which needs 4.5:1
@@ -580,6 +581,7 @@ $tag-colors: (
     scratch: $scratch-orange,
     session: #7BC559,
     how-to: #FFC800,
+    microbit: $microbit-purple,
 );
 $tag-color-default: #3f88c5;
 $archive-bar-width: 16px;
@@ -720,4 +722,12 @@ $archive-bar-width: 16px;
     .archive__item-excerpt {
         margin: 0;
     }
+}
+
+/* MakeCode */
+.language-makecode img {
+    display: block;
+    max-width: 100%;
+    height: auto;
+    margin: 1em 0;
 }
