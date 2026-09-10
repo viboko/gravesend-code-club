@@ -1,19 +1,18 @@
-# Display title and URL for each post tag. Used to:
-#  - label and link the coloured tag lozenges on post listings
-#    (see _includes/archive-single.html)
-#  - title the generated per-tag archive pages (see _layouts/tag-archive.html)
+# URL for each post tag, used to link the coloured tag lozenges on post
+# listings and post headers to that tag's archive page (see
+# _includes/archive-single.html and _includes/post-header.html). The
+# lozenge's own label is just the raw tag text, not looked up here.
+#
+# The archive page's title comes from that page's own front matter (e.g.
+# tags/microbit/index.md), not from here - there used to be a second
+# `title:` field on each entry below, but nothing ever read it.
 project:
-  title: Projects
   url: /tags/project
 scratch:
-  title: Scratch
   url: /tags/scratch
 session:
-  title: Sessions
   url: /tags/session
 how-to:
-  title: How-To Guides
   url: /tags/how-to
 micro:bit:
-  title: micro:bit
   url: /tags/microbit
