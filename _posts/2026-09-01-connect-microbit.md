@@ -7,29 +7,41 @@ excerpt: "How to connect a micro:bit and get set up ready to start coding."
 published: true
 ---
 
-To work on any of the micro:bit projects on this site, you will first need to connect your microbit. 
+To work on any of the [micro:bit projects](/tags/microbit) on this site, you will first need to connect your microbit. 
 
-Step 1: Go to the MakeCode editor: https://makecode.microbit.org/
+## Step 1: Open the editor
 
-Step 2: Click on the New Project button, give you project a name and click Create
+Go to the MakeCode editor: [makecode.microbit.org](https://makecode.microbit.org/)
 
-IMAGE
+## Step 2: Start a new project
 
-IMAGE
+Click on the New Project button, give you project a name and click Create
 
-Step 3: Click the three dots next to the Download button in the bottom left of the screen, and choose &**Connect Device**.
+![todo](/assets/img/connect-microbit/new-project.png){: .how-to-image}
 
-IMAGE
+![todo](/assets/img/connect-microbit/create-project.png){: .how-to-image}
 
-Step 4: Using the USB cable provided, plug your micro:bit into your computer. You should see a red light turn on! 
+## Step 3: Start connection process
 
-PHOTO
+Click the three dots next to the Download button in the bottom left of the screen, and choose &**Connect Device**.
 
-Step 5: Press Next and then Pair. You should see a list of devices to pair - you might see other things listed there. You are looking for something with a name like "BBC micro:bit". Select it and click Connect.
+![todo](/assets/img/connect-microbit/connect-device.png){: .how-to-image}
 
-IMAGE
+## Step 4: Connect the device
 
-Step 6: To test that everything is working, create a simple script like this:
+Using the USB cable provided, plug your micro:bit into your computer. You should see some lights turn on! 
+
+![todo](/assets/img/connect-microbit/microbit-connected.jpg){: .how-to-image}
+
+## Step 5: Pair the device
+
+Press Next and then Pair. You should see a list of devices to pair - you might see other things listed there. You are looking for something with a name like "BBC micro:bit". Select it and click Connect.
+
+![todo](/assets/img/connect-microbit/connect-dialog.png){: .how-to-image}
+
+## Step 6: Quick test
+
+To test that everything is working, create a simple script like this:
 
 ```makecode
 input.onButtonPressed(Button.A, function () {
@@ -37,10 +49,15 @@ input.onButtonPressed(Button.A, function () {
 })
 ```
 
-Step 7: Now click Download to transfer the program to your micro:bit. Once that's done you should be able to press the A button on the micro:bit and see the heart icon! 
+## Step 7: Download the program
 
-PHOTO
+Now click Download to transfer the program to your micro:bit. Once that's done you should be able to press the A button on the micro:bit and see the heart icon! 
 
-Important! Always eject your micro:bit before disconnecting it.
+![todo](/assets/img/connect-microbit/heart-icon.png){: .how-to-image}
 
-WINDOWS IMAGE - MAC IMAGE
+<div class="callout callout--important" markdown="1">
+**Important:** Always eject your micro:bit before disconnecting it. Please follow the guide for your platform:
+
+* Windows: [Safely remove hardware in Windows](https://support.microsoft.com/en-us/windows/hardware/safely-remove-hardware-in-windows)
+* Mac: [Eject a storage device](https://support.apple.com/en-gb/guide/mac-help/mchl027f1d66/mac)
+</div>
