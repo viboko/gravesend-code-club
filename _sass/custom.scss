@@ -33,7 +33,8 @@ $callout-color: #d9822b;
     // Tag lozenge text stays black in both modes - the lozenge background
     // colors ($tag-colors below) don't change, and all of them were
     // checked for contrast against black, not white (see the pa11y-ci
-    // check in `just lint-pa11y`).
+    // check in `just lint-pa11y`). micro:bit's purple is the exception -
+    // see $tag-text-colors below.
     --color-tag-text: #000;
 
     // Archive-list post title text - separate from --color-tag-text above
@@ -259,6 +260,7 @@ a:focus-visible {
 // See the pa11y-ci check in `just lint-pa11y`.
 $code-club-green: rgb(54 164 70);
 $scratch-orange: rgb(248 158 51);
+$microbit-purple: rgb(96 54 197);
 
 // A darker take on $code-club-green, for use as a fill behind white text
 // in smaller/normal-size text (e.g. table headers), which needs 4.5:1
@@ -342,6 +344,30 @@ $code-club-green-text-bg: #2C8639;
 
     &:visited {
         @include yiq-contrasted($code-club-green);
+    }
+}
+
+.btn--microbit {
+    // Unlike $scratch-orange above, yiq-contrasted's default heuristic
+    // already picks white here, which is also the right call on contrast
+    // grounds (white reaches ~7.4:1 against $microbit-purple, comfortably
+    // clearing the 4.5:1 minimum) - see the pa11y-ci check in
+    // `just lint-pa11y`.
+    @include yiq-contrasted($microbit-purple);
+
+    &:visited {
+        @include yiq-contrasted($microbit-purple);
+    }
+
+    // Without this, the theme's own `a:hover` rule at the top of this file
+    // (a class+pseudo-class selector, so more specific than the single
+    // `.btn--microbit` class above) would win on hover and swap the text
+    // to --color-link-hover - a dark teal that reads poorly against this
+    // purple. Reusing --color-masthead-text here only for its off-white
+    // value, not because it's semantically a masthead colour, keeps a
+    // visible hover state without losing contrast.
+    &:hover {
+        color: var(--color-masthead-text);
     }
 }
 
@@ -574,12 +600,26 @@ $code-club-green-text-bg: #2C8639;
     }
 }
 
-// Random-ish placeholder colours - tweak freely.
+// Random-ish placeholder colours - tweak freely. Keys are the *slugified*
+// tag (what `{{ tag | slugify }}` in archive-single.html/post-header.html
+// actually produces, e.g. Jekyll's slugify turns "micro:bit" into
+// "micro-bit" by replacing non-alphanumerics with "-"), not the raw tag
+// text, since that's what ends up in the compiled `--#{$tag}` class name
+// below.
 $tag-colors: (
     project: #0AB6FF,
     scratch: $scratch-orange,
     session: #7BC559,
     how-to: #FFC800,
+    micro-bit: $microbit-purple,
+);
+
+// Per-tag override of the lozenge text colour, for tags whose background
+// doesn't clear 4.5:1 against black (see --color-tag-text above) - only
+// micro:bit's purple needs this so far. Any tag not listed here keeps the
+// default black text.
+$tag-text-colors: (
+    micro-bit: #fff,
 );
 $tag-color-default: #3f88c5;
 $archive-bar-width: 16px;
@@ -624,6 +664,22 @@ $archive-bar-width: 16px;
             opacity: 0.8;
             box-shadow: 0 2px 6px rgba(#000, 0.3);
             transform: translateY(-1px);
+        }
+
+        // Overrides $tag-text-colors on top of the black set above - this
+        // has to come after that generic `&:hover, &:focus` block (not
+        // just after the background `@each` above) since it's an
+        // equal-specificity selector and CSS resolves ties by source
+        // order, not nesting position.
+        @each $tag, $text-color in $tag-text-colors {
+            &--#{$tag} {
+                color: $text-color;
+
+                &:hover,
+                &:focus {
+                    color: $text-color;
+                }
+            }
         }
     }
 
@@ -720,4 +776,12 @@ $archive-bar-width: 16px;
     .archive__item-excerpt {
         margin: 0;
     }
+}
+
+/* MakeCode */
+.language-makecode img {
+    display: block;
+    max-width: 100%;
+    height: auto;
+    margin: 1em 0;
 }

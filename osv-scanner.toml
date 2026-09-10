@@ -11,6 +11,11 @@ ignoreUntil = 2027-01-05
 reason = "Dev-only transitive dependency of @lhci/cli; no fix available without a breaking downgrade"
 
 [[IgnoredVulns]]
+id = "GHSA-7pqw-9j4j-h8q3" # extract-zip, via @lhci/cli -> lighthouse -> puppeteer-core
+ignoreUntil = 2027-01-05
+reason = "Dev-only transitive dependency of @lhci/cli; no fix available without a breaking downgrade"
+
+[[IgnoredVulns]]
 id = "GHSA-4mjr-xmp4-gh2g" # qs, via @lhci/cli -> lighthouse -> puppeteer-core
 ignoreUntil = 2027-01-05
 reason = "Dev-only transitive dependency of @lhci/cli; no fix available without a breaking downgrade"

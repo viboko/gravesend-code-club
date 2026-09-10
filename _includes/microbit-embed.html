@@ -1,0 +1,15 @@
+{% comment %}
+  Links to a MakeCode micro:bit project via its share link (include.id,
+  e.g. "_gAg42F0RuVm4"). Mirrors scratch-embed.html's "See in Scratch"
+  button - but MakeCode's simulator has no fixed aspect ratio (it
+  computes its own height at runtime, and grows taller for a project
+  that attaches extra simulator parts than for a bare board), so an
+  embedded iframe either gets cut off or leaves a lot of blank space
+  depending on the project. A link out is more reliable than an embed
+  here.
+{% endcomment %}
+<div class="no-print">
+    <p>
+        <a href="https://makecode.microbit.org/{{ include.id }}" class="btn btn--large btn--microbit">See in MakeCode</a>
+    </p>
+</div>
