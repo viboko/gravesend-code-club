@@ -1,0 +1,10 @@
+{% comment %}
+  Links to the print-friendly version of the current post/project, built by
+  _plugins/print_pages.rb. Hidden when printing the normal page itself -
+  it's a screen-only navigation aid.
+{% endcomment %}
+<p class="post__print-link no-print">
+  <a href="{{ page.url | append: '/print/' | relative_url }}">
+    <i class="fas fa-print" aria-hidden="true"></i> Print version
+  </a>
+</p>
