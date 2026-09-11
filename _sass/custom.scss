@@ -786,13 +786,8 @@ $archive-bar-width: 16px;
     margin: 1em 0;
 }
 
-/* Scratch and MakeCode blocks are rendered at a size that looks right on
-   screen, but print at that same physical size (CSS pixels map directly to
-   inches on paper), which dwarfs the surrounding text. A CSS max-width
-   can't fix this - it only ever caps growth, it can't shrink an element
-   below its own native size, and every block needs shrinking, not just the
-   wide ones. Actual scaling is done in JS (see print-scale-blocks.js),
-   which resizes each block by a fixed factor when printing starts. */
+/* Scratch and MakeCode blocks on the print page (see post-print.html) are
+   shrunk in JS, not CSS - see print-page-scale-blocks.js for why. */
 
 /* Link to the print-friendly version of a post (see print-link.html) */
 .post__print-link {
