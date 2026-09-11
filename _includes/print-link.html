@@ -1,0 +1,11 @@
+{% comment %}
+  Printer icon linking to the print-friendly version of the current
+  post/project, built by _plugins/print_pages.rb (only for `post` and
+  `project` layouts - keep in sync with PRINTABLE_LAYOUTS there). Hidden
+  when printing the normal page itself - it's a screen-only navigation aid.
+{% endcomment %}
+{% if page.layout == "post" or page.layout == "project" %}
+  <a class="post__print-link no-print" href="{{ page.url | append: '-print' | relative_url }}" aria-label="Print version">
+    <i class="fas fa-print" aria-hidden="true"></i>
+  </a>
+{% endif %}

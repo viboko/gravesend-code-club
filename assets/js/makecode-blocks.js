@@ -9,8 +9,20 @@
     // recognises, which "makecode" isn't).
     const selector = "pre > code.language-makecode";
 
+    // Rendering is a round trip through the iframe, so the block stays
+    // hidden (see custom.scss) until it's replaced with an image, to avoid
+    // a flash of raw code. If that round trip doesn't finish - the render
+    // fails, or the iframe never responds at all (blocked, offline,
+    // makecode.microbit.org down) - un-hide the raw code as a fallback
+    // rather than leaving a gap where the snippet should be.
+    const FALLBACK_TIMEOUT_MS = 8000;
+
     let renderer;
     let nextId = 0;
+
+    function showRawCode(pre) {
+        pre.style.display = "block";
+    }
 
     /*
      * Create the hidden MakeCode rendering iframe.
@@ -66,7 +78,12 @@
         else if (message.type === "renderblocks") {
             const pre = document.getElementById(message.id);
 
-            if (!pre || !message.uri) {
+            if (!pre) {
+                return;
+            }
+
+            if (!message.uri) {
+                showRawCode(pre);
                 return;
             }
 
@@ -91,6 +108,18 @@
         }
 
         injectRenderer();
+
+        // Covers every failure mode in one place: the iframe never loads
+        // or never responds (blocked, offline, makecode.microbit.org
+        // down), "renderready" never arrives, or an individual render
+        // fails. Anything still unrendered after this long is un-hidden -
+        // a successfully rendered block has already been replaced by then,
+        // so this only ever touches the ones still stuck.
+        setTimeout(function () {
+            document.querySelectorAll(selector).forEach(function (code) {
+                showRawCode(code.parentElement);
+            });
+        }, FALLBACK_TIMEOUT_MS);
     }
 
     if (document.readyState === "loading") {

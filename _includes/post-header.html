@@ -36,6 +36,7 @@
         {% endfor %}
       </ul>
     {% endif %}
+    {% include print-link.html %}
   </div>
   <time class="post__date" datetime="{{ page.date | date_to_xmlschema }}">{{ formatted_date }}</time>
 </header>

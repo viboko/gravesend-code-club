@@ -785,3 +785,29 @@ $archive-bar-width: 16px;
     height: auto;
     margin: 1em 0;
 }
+
+/* A ```makecode block is rendered by JS (makecode-blocks.js) via a round
+   trip through an iframe, which takes long enough to be visible - unlike
+   Scratch's synchronous rendering (scratch-blocks.js), which finishes
+   before the page ever paints. Hide the raw code until it's replaced, so
+   it doesn't flash on screen first. If rendering fails or never completes,
+   the script un-hides it again as a fallback. */
+pre:has(> code.language-makecode) {
+    display: none;
+}
+
+/* Scratch and MakeCode blocks on the print page (see post-print.html) are
+   shrunk in JS, not CSS - see print-page-scale-blocks.js for why. */
+
+/* Printer icon next to the tag lozenges (post__title-row, post-header.html)
+   linking to the print-friendly version of a post (print-link.html) */
+.post__print-link {
+    color: var(--color-text-muted);
+    font-size: $type-size-5;
+    text-decoration: none;
+
+    &:hover,
+    &:focus {
+        color: var(--color-link-hover);
+    }
+}

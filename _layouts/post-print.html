@@ -1,0 +1,22 @@
+---
+---
+<!doctype html>
+<html lang="en">
+  <head>
+    {% include head.html %}
+    {% include head/custom.html %}
+    <meta name="robots" content="noindex, follow">
+  </head>
+
+  <body class="layout--post-print">
+    <div id="main" role="main" class="content">
+      {% include post-header.html %}
+
+      {{ content }}
+    </div>
+
+    {% include footer/custom.html %}
+    <script src="{{ '/assets/js/print-page-scale-blocks.js' | relative_url }}"></script>
+    {% include scripts.html %}
+  </body>
+</html>
