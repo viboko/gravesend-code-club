@@ -25,5 +25,5 @@ permalink: /:year/:month/:day/:title
 
 # Next Code Club session, shown in the site banner (see _includes/next-club-banner.html)
 code_club:
-  next_date: 2026-09-12
+  next_date: 2026-10-10
   signup_url: "https://codeclub.org/en/clubs/3dc59716-415e-4837-b494-2b438ef63b65"
