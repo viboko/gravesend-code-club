@@ -3,10 +3,12 @@ title: Racecar
 layout: project
 date: 2026-10-01
 tags: [scratch, project]
-excerpt: ""
+excerpt: "Build a top-down racing game in Scratch, with steering, acceleration, track edges and a lap counter that can't be cheated."
 ---
 
 <section markdown="1">
+
+Drive a racecar around a track using the arrow keys! You'll make the car speed up and slow down, crash into the edges of the track, and count your laps.
 
 {% include scratch-embed.html id="1389454497" %}
 
@@ -15,16 +17,13 @@ excerpt: ""
 </section>
 <section markdown="1">
 
-## 🔄 Step 1: Remix the Starter Pack
+## 🔄 Step 1: Remix the starter project
 
-Follow the link: [scratch.mit.edu/projects/1389467381/editor/](https://scratch.mit.edu/projects/1389467381/editor/).
+Open the starter project at [scratch.mit.edu/projects/1389467381](https://scratch.mit.edu/projects/1389467381/editor/){:target="_blank" rel="noopener noreferrer"} and click **Remix** to make your own copy. Don't forget to give it a new name!
 
-Next tap **Remix**. When the project loads, give it a new name. Have a look around the project.
+Before you start coding, have a look around the project:
 
-</section>
-<section markdown="1">
-
-* *What sprites do you have available?*
+* *What sprites are there?*
 * *What costumes do the sprites have?*
 * *Is there any code already?*
 
@@ -33,20 +32,20 @@ Next tap **Remix**. When the project loads, give it a new name. Have a look arou
 </section>
 <section markdown="1">
 
-## Step 2: Create a background
+## 🏁 Step 2: Choose a racetrack
 
-You can use the existing background, or create your own one at [racetrack.viboko.dev](https://racetrack.viboko.dev).
+You can use the racetrack that comes with the starter project, or design your own at [racetrack.viboko.dev](https://racetrack.viboko.dev){:target="_blank" rel="noopener noreferrer"} and upload it as a new backdrop.
 
 ---
 
 </section>
 <section markdown="1">
 
-## Step 3: Create a speed variable
+## 🎚️ Step 3: Add a speed variable
 
-First, add a new variable called **speed**.
+Click **Make a Variable** and call it **speed**.
 
-When the game starts you should set the speed to **zero**, position the car at the start line, pointing in the right direction, and start a **forever** loop. Add this code to the car sprite:
+When the game starts, we want the car to be parked on the start line, facing the right way, with its speed set to **0**. Then a **forever** loop keeps the car moving by however much its speed is. Add this code to the car sprite:
 
 ```scratch
 when green flag clicked
@@ -58,16 +57,18 @@ forever
 end
 ```
 
-For now, the speed is always zero, so the car won't move yet.
+The speed is always **0** for now, so don't worry that the car isn't moving yet - that's next!
+
+* *If you've made your own racetrack, can you change the x and y numbers so that the car starts on your start line?*
 
 ---
 
 </section>
 <section markdown="1">
 
-## Step 4: Make the car accelerate up to a top speed
+## 🚀 Step 4: Make the car speed up
 
-Put this if block in the **forever** loop:
+When the up arrow is pressed, we want the car to go a little bit faster - but not forever, or it would get impossibly fast! Put this **if** block inside the **forever** loop:
 
 ```scratch
 if <key (up arrow v) pressed?> then
@@ -77,16 +78,18 @@ if <key (up arrow v) pressed?> then
 end
 ```
 
-In this example, the top speed is 5.
+This gives the car a top speed of **5**.
+
+* *What happens if you change the top speed to 10? Is the car still easy to drive?*
 
 ---
 
 </section>
 <section markdown="1">
 
-## Step 5: Make the car decelerate
+## 🐢 Step 5: Make the car slow down and reverse
 
-Put this next in the **forever** loop:
+Now let's use the down arrow to brake. If you keep holding it down, the car will start to reverse. Put this inside the **forever** loop, underneath the last bit of code:
 
 ```scratch
 if <key (down arrow v) pressed?> then
@@ -96,16 +99,18 @@ if <key (down arrow v) pressed?> then
 end
 ```
 
-In this example, the top reverse speed is 3.
+This means the car can reverse at a speed of up to **3**.
+
+* *Real cars slow down by themselves when you take your foot off the pedal. Can you make the speed gradually go back to 0 when no keys are pressed?*
 
 ---
 
 </section>
 <section markdown="1">
 
-## Step 6: Make the car turn
+## ↩️ Step 6: Make the car steer
 
-Put this next in the **forever** loop:
+Next, let's use the left and right arrows to steer. Put this inside the **forever** loop too:
 
 ```scratch
 if <key (left arrow v) pressed?> then
@@ -116,16 +121,22 @@ if <key (right arrow v) pressed?> then
 end
 ```
 
+Try driving around the track!
+
+* *What happens if you turn by more or fewer degrees?*
+
 ---
 
 </section>
 <section markdown="1">
 
-## Step 7: Make the car hit the sides of the track
+## 💥 Step 7: Crash into the edges of the track
 
-If you make the car size 100, you'll see that there is a purple bumper at the front. You can use this to detect the edges of the track.
+At the moment, the car can drive straight over the grass! Let's make it stop when it hits the red and white edges of the track.
 
-Put this next in the **forever** loop:
+If you look closely at the car's costume (try setting the car's size to **100**), you'll see a purple bumper on the front. We can use this to check whether the front of the car has hit the edge.
+
+Put this inside the **forever** loop:
 
 ```scratch
 if <<color (#8f5bff) is touching (#ffffff)?> or <color (#8f5bff) is touching (#ff0000)?>> then
@@ -133,20 +144,23 @@ if <<color (#8f5bff) is touching (#ffffff)?> or <color (#8f5bff) is touching (#f
 end
 ```
 
+* *Can you make the car bounce backwards a little bit when it crashes, instead of just stopping?*
+* *Can you play a crash sound?*
+
 ---
 
 </section>
 <section markdown="1">
 
-## Step 8: Add a lap counter
+## 🔢 Step 8: Count the laps
 
-Add a new variable called **laps**. You'll want to set it to **zero** when the game starts: 
+Make another variable called **laps**. Set it to **0** when the game starts, by adding this to your **when green flag clicked** script, before the **forever** loop:
 
 ```scratch
 set [laps v] to (0)
 ```
 
-Inside the **forever** loop, check to see if the car bumper touches the yellow on the finish line:
+Then, inside the **forever** loop, check whether the car's bumper is touching the yellow squares on the finish line:
 
 ```scratch
 if <color (#8f5bff) is touching (#eec200)?> then
@@ -154,40 +168,44 @@ if <color (#8f5bff) is touching (#eec200)?> then
 end
 ```
 
-If you test it now, you'll see that the lap counter goes up too fast and you can easily cheat by reversing back over the finish line! Let's fix it by adding a checkpoint...
+Give it a test. Uh-oh - the lap counter goes up far too quickly, and you can cheat by reversing backwards and forwards over the finish line! Let's fix that with a checkpoint...
 
 ---
 
 </section>
 <section markdown="1">
 
-## Step 9: Add a checkpoint
+## 🚩 Step 9: Add a checkpoint
 
-Add a new sprite about half way around the track. It should just be a coloured rectangle, something like this: 
+Paint a new sprite called **checkpoint**. It only needs to be a coloured rectangle. Drag it about halfway around the track, and make it big enough to stretch across the whole track, like this:
 
-CHECKPOINT IMAGE HERE
+![Step 9 - a green checkpoint rectangle across the track, about halfway round](/assets/img/racecar-project/step-09-01.webp)
 
-Inside the new checkpoint sprite, add the following code so that you can't see the sprite... but don't hide it otherwise it won't work! 
+We don't want players to see the checkpoint, so add this code to the checkpoint sprite to make it invisible:
 
 ```scratch
 when green flag clicked
 set [ghost v] effect to (100)
 ```
 
+⚠️ **Important**: don't use the **hide** block! Scratch can't tell when something is touching a hidden sprite, so the checkpoint would stop working. The ghost effect makes it invisible, but it's still there.
+
 ---
 
 </section>
 <section markdown="1">
 
-## Step 10: Add a checkpoint variable
+## ✅ Step 10: Only count a lap after the checkpoint
 
-Now add a new variable called **checkpoint** which starts off as **zero**:
+Make one more variable called **checkpoint**, and set it to **0** when the game starts, just like you did with **laps**:
 
 ```scratch
 set [checkpoint v] to (0)
 ```
 
-Change the code you added in step 8 like this:
+The idea is that **checkpoint** becomes **1** when the car drives through the checkpoint. A lap only counts if the car crosses the finish line *after* going through the checkpoint. Then **checkpoint** goes back to **0**, ready for the next lap.
+
+Go back to the car sprite and change the code you added in Step 8 so it looks like this:
 
 ```scratch
 if <<color (#8f5bff) is touching (#eec200)?> and <(checkpoint) = (1)>> then
@@ -199,6 +217,10 @@ if <touching (checkpoint v)?> then
 end
 ```
 
+Now try to cheat - you can't!
+
+* *Can you play a sound or show a message each time a lap is completed?*
+
 ---
 
 </section>
@@ -206,6 +228,11 @@ end
 
 ## 🤔 Challenges
 
-* **
+* *Can you add a timer, so players can try to beat their fastest lap?*
+* *Can you make the game end after 3 laps, and show a "Finished!" message?*
+* *Can you add an oil slick to the track that makes the car spin round when it drives over it?*
+* *Can you add a second car, controlled with the W, A, S and D keys, so two players can race each other?*
+* *Can you add an engine sound that gets higher as the car goes faster?*
+* *What else can you think of?*
 
 </section>
