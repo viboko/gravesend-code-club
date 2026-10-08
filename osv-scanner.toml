@@ -39,3 +39,27 @@ reason = "Dev-only transitive dependency of @lhci/cli; no fix available without 
 id = "GHSA-w5hq-g745-h8pq" # uuid, via @lhci/cli -> lighthouse -> puppeteer-core
 ignoreUntil = 2027-01-05
 reason = "Dev-only transitive dependency of @lhci/cli; no fix available without a breaking downgrade"
+
+# The entries below are transitive, dev-only dependencies of other linting /
+# accessibility tooling. As above, none of them ship in the built site, and
+# no fixed version is reachable within their parents' version ranges.
+
+[[IgnoredVulns]]
+id = "GHSA-c475-qrg2-pj4r" # basic-ftp, via @lhci/cli -> proxy-agent -> get-uri (pins ^5; fix is 6.x)
+ignoreUntil = 2027-01-05
+reason = "Dev-only transitive dependency of @lhci/cli; fix needs a major bump get-uri doesn't allow"
+
+[[IgnoredVulns]]
+id = "GHSA-vfj7-8cjw-p6xm" # braces, via stylelint -> micromatch
+ignoreUntil = 2027-01-05
+reason = "Dev-only transitive dependency of stylelint, only fed our own glob patterns; no fixed version released"
+
+[[IgnoredVulns]]
+id = "GHSA-hp3w-g68c-fv3c" # sprintf-js, via @lhci/cli -> @lhci/utils -> js-yaml@3 -> argparse
+ignoreUntil = 2027-01-05
+reason = "Dev-only transitive dependency of @lhci/cli; no fixed version released"
+
+[[IgnoredVulns]]
+id = "GHSA-238p-pmpm-9mq7" # katex, via markdownlint-cli -> markdownlint -> micromark-extension-math (pins ^0.16; fix is 0.18)
+ignoreUntil = 2027-01-05
+reason = "Dev-only transitive dependency of markdownlint, only run on our own Markdown; fix is outside the range its parent allows"
