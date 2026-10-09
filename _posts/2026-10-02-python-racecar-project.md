@@ -8,7 +8,7 @@ excerpt: "Write a top-down racing game in Python with pygame. Drive a car round 
 
 <section markdown="1">
 
-Ready to try some real code? In this project you'll make a racing game in **Python**, using a library called **pygame**. You'll drive a car round a racetrack with the arrow keys, and make it crash into the red and white kerbs.
+In this project you'll make a racing game in **Python**, using a library called **pygame**. You'll drive a car round a racetrack with the arrow keys, and make it crash into the red and white kerbs.
 
 If you've made the [Scratch version of Racecar]({% link _posts/2026-10-01-racecar-project.md %}), lots of this will feel familiar - it's the same game, just typed instead of built from blocks.
 
@@ -375,8 +375,7 @@ Now try to drive through the kerbs - you can't!
 * *Can you make the car steer more slowly when it's going slowly, like a real car?*
 * *Can you add a second car, controlled with the W, A, S and D keys, so two players can race each other?*
 * *Can you add an oil slick to the track that makes the car spin round when it drives over it?*
+* *Can you add a lap counter and time how long each lap takes?*
 * *What else can you think of?*
-
-Next time, we'll count laps and time them, so you can race against the clock!
 
 </section>
