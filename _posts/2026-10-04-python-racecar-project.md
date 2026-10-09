@@ -1,7 +1,7 @@
 ---
 title: Racecar in Python
 layout: project
-date: 2026-10-02
+date: 2026-10-04
 tags: [python, project]
 excerpt: "Write a top-down racing game in Python with pygame. Drive a car round your own racetrack, and crash into the kerbs!"
 ---
@@ -9,7 +9,7 @@ excerpt: "Write a top-down racing game in Python with pygame. Drive a car round 
 <section markdown="1">
 
 <div class="callout callout--important" markdown="1">
-Important! Before you get started, make sure you have Python and pygame set up on your computer: [Set up Python and pygame]({% link _posts/2026-10-01-set-up-pygame.md %})
+Important! Before you get started, make sure you have Python and pygame set up on your computer: [Set up Python and pygame]({% link _posts/2026-10-03-set-up-pygame.md %})
 </div>
 
 In this project you'll make a racing game in **Python**, using a library called **pygame**. You'll drive a car round a racetrack with the arrow keys, and make it crash into the red and white kerbs.

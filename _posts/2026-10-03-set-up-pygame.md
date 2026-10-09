@@ -1,7 +1,7 @@
 ---
 title: Set up Python and pygame
 layout: post
-date: 2026-10-01
+date: 2026-10-03
 tags: [python, how-to]
 excerpt: "How to install Python, Thonny and pygame, ready to start making games in Python."
 ---
