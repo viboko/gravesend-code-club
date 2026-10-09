@@ -1,0 +1,35 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 420 340" width="420" height="340" font-family="Helvetica, Arial, sans-serif" font-size="18">
+  <title>Angles in the racecar game</title>
+  <defs>
+    <marker id="head" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#333"/>
+    </marker>
+    <marker id="turn" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#2f7d95"/>
+    </marker>
+  </defs>
+  <rect width="420" height="340" rx="12" fill="#fff"/>
+  <!-- Clockwise turn, from 0 towards 90 -->
+  <path d="M 291 196 A 85 85 0 0 1 239 250" fill="none" stroke="#2f7d95" stroke-width="3" stroke-dasharray="6 5" marker-end="url(#turn)"/>
+  <text x="290" y="248" fill="#2f7d95" font-size="15">adding to the</text>
+  <text x="290" y="266" fill="#2f7d95" font-size="15">angle turns</text>
+  <text x="290" y="284" fill="#2f7d95" font-size="15">clockwise</text>
+  <!-- Arrows -->
+  <g stroke="#333" stroke-width="3" marker-end="url(#head)">
+    <line x1="235" y1="170" x2="320" y2="170"/>
+    <line x1="210" y1="190" x2="210" y2="265"/>
+    <line x1="185" y1="170" x2="100" y2="170"/>
+    <line x1="210" y1="150" x2="210" y2="75"/>
+  </g>
+  <text x="330" y="176" font-weight="bold">0</text>
+  <text x="210" y="295" font-weight="bold" text-anchor="middle">90</text>
+  <text x="90" y="176" font-weight="bold" text-anchor="end">180</text>
+  <text x="210" y="60" font-weight="bold" text-anchor="middle">270</text>
+  <text x="330" y="196" font-size="14" fill="#555">right</text>
+  <text x="210" y="315" font-size="14" fill="#555" text-anchor="middle">down</text>
+  <text x="90" y="196" font-size="14" fill="#555" text-anchor="end">left</text>
+  <text x="210" y="40" font-size="14" fill="#555" text-anchor="middle">up</text>
+  <!-- Car, facing right (0 degrees) -->
+  <rect x="190" y="160" width="40" height="20" rx="6" fill="#2e9e3e" stroke="#1d6b28" stroke-width="2"/>
+  <rect x="212" y="163" width="8" height="14" rx="2" fill="#cfe8f5"/>
+</svg>
