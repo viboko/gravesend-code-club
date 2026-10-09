@@ -38,9 +38,12 @@ You should also create two variables: one for your choice and one for the choice
 </section>
 <section markdown="1">
 
-## Step 2: Handle button presses for **Rock**, **Paper** and **Scissors**
+## Step 2: Handle button presses for Rock, Paper and Scissors
+
+<div class="makecode-row" markdown="1">
 
 ```makecode
+function send_choice () {} // @hide
 input.onButtonPressed(Button.A, function () {
     choice = 1
     basic.showLeds(`
@@ -52,7 +55,10 @@ input.onButtonPressed(Button.A, function () {
         `)
     send_choice()
 })
+```
 
+```makecode
+function send_choice () {} // @hide
 input.onButtonPressed(Button.B, function () {
     choice = 2
     basic.showLeds(`
@@ -64,13 +70,18 @@ input.onButtonPressed(Button.B, function () {
         `)
     send_choice()
 })
+```
 
+```makecode
+function send_choice () {} // @hide
 input.onButtonPressed(Button.AB, function () {
     choice = 3
     basic.showIcon(IconNames.Scissors)
     send_choice()
 })
 ```
+
+</div>
 
 You'll notice that after we show each icon we call a function to send the value to the other micro:bit. We're going to write that function next...
 
@@ -93,21 +104,21 @@ function send_choice () {
 </section>
 <section markdown="1">
 
-## Step 2: 
+## Step 4: 
 
 ---
 
 </section>
 <section markdown="1">
 
-## Step 2: 
+## Step 5: 
 
 ---
 
 </section>
 <section markdown="1">
 
-## Step 2: 
+## Step 6: 
 
 ---
 
@@ -115,8 +126,5 @@ function send_choice () {
 <section markdown="1">
 
 ## 🤔 Challenges
-
-* Could you make a cheat mode? e.g. if you tilt the microbit to the left it always picks Scissors*
-* *You could make the user make their choice by pressing A for Rock, B for Scissors and A+B for Paper. Can you make the micro:bit display who won?* **TRICKY** 🤔
 
 </section>
