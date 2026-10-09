@@ -796,6 +796,24 @@ pre:has(> code.language-makecode) {
     display: none;
 }
 
+/* Several ```makecode blocks shown side by side, e.g. one per button
+   handler. Wrap them in <div class="makecode-row" markdown="1">. Each
+   rendered image (or raw-code fallback) becomes a flex item, and they
+   wrap onto new lines when the screen is too narrow to fit them. */
+.makecode-row {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: flex-start;
+    gap: 1em 2em;
+    margin: 1em 0;
+
+    > img,
+    > pre {
+        max-width: 100%;
+        margin: 0;
+    }
+}
+
 /* Scratch and MakeCode blocks on the print page (see post-print.html) are
    shrunk in JS, not CSS - see print-page-scale-blocks.js for why. */
 
