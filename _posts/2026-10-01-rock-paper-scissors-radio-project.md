@@ -93,6 +93,7 @@ You'll notice that after we show each icon we call a function to send the value 
 ## Step 3: Send the choice to the other micro:bit
 
 ```makecode
+function check_choices () {} // @hide
 function send_choice () {
     radio.sendValue("other", choice)
     check_choices()
@@ -104,21 +105,40 @@ function send_choice () {
 </section>
 <section markdown="1">
 
-## Step 4: 
+## Step 4: Receive the choice from the other micro:bit
+
+```makecode
+function check_choices () {} // @hide
+radio.onReceivedValue(function (name, value) {
+    other = value
+    check_choices()
+})
+```
 
 ---
 
 </section>
 <section markdown="1">
 
-## Step 5: 
+## Step 5: Check to see who won
 
----
-
-</section>
-<section markdown="1">
-
-## Step 6: 
+```makecode
+function check_choices () {
+    if (choice == 0 || other == 0) {
+        return
+    } else if (choice == other) {
+        basic.showIcon(IconNames.No)
+    } else if (choice == other + 1) {
+        basic.showIcon(IconNames.Happy)
+    } else if (choice == 1 && other == 3) {
+        basic.showIcon(IconNames.Happy)
+    } else {
+        basic.showIcon(IconNames.Sad)
+    }
+    choice = 0
+    other = 0
+}
+```
 
 ---
 
