@@ -33,8 +33,8 @@ $callout-color: #d9822b;
     // Tag lozenge text stays black in both modes - the lozenge background
     // colors ($tag-colors below) don't change, and all of them were
     // checked for contrast against black, not white (see the pa11y-ci
-    // check in `just lint-pa11y`). micro:bit's purple is the exception -
-    // see $tag-text-colors below.
+    // check in `just lint-pa11y`). micro:bit's purple and Python's blue are
+    // the exceptions - see $tag-text-colors below.
     --color-tag-text: #000;
 
     // Archive-list post title text - separate from --color-tag-text above
@@ -261,6 +261,7 @@ a:focus-visible {
 $code-club-green: rgb(54 164 70);
 $scratch-orange: rgb(248 158 51);
 $microbit-purple: rgb(96 54 197);
+$python-blue: rgb(55 118 171);
 
 // A darker take on $code-club-green, for use as a fill behind white text
 // in smaller/normal-size text (e.g. table headers), which needs 4.5:1
@@ -612,14 +613,16 @@ $tag-colors: (
     session: #7BC559,
     how-to: #FFC800,
     micro-bit: $microbit-purple,
+    python: $python-blue,
 );
 
 // Per-tag override of the lozenge text colour, for tags whose background
-// doesn't clear 4.5:1 against black (see --color-tag-text above) - only
-// micro:bit's purple needs this so far. Any tag not listed here keeps the
-// default black text.
+// doesn't clear 4.5:1 against black (see --color-tag-text above) -
+// micro:bit's purple and Python's blue (4.3:1 against black, but 4.8:1
+// against white). Any tag not listed here keeps the default black text.
 $tag-text-colors: (
     micro-bit: #fff,
+    python: #fff,
 );
 $tag-color-default: #3f88c5;
 $archive-bar-width: 16px;
@@ -827,5 +830,60 @@ pre:has(> code.language-makecode) {
     &:hover,
     &:focus {
         color: var(--color-link-hover);
+    }
+}
+
+/* Copy-to-clipboard button added to each ```python code block by
+   copy-code.js. `div.highlighter-rouge` is the outer wrapper kramdown
+   gives a fenced code block - the button is positioned against it rather
+   than `pre`, so it stays in the top-right corner even when the code
+   scrolls sideways. Hidden until the block is hovered or focused. */
+div.highlighter-rouge {
+    position: relative;
+
+    .copy-code-button {
+        opacity: 0;
+        transition: opacity 0.15s ease, background-color 0.15s ease, color 0.15s ease;
+    }
+
+    &:hover .copy-code-button,
+    &:focus-within .copy-code-button {
+        opacity: 1;
+    }
+}
+
+.copy-code-button {
+    position: absolute;
+    top: 0.5em;
+    inset-inline-end: 0.5em;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 2em;
+    height: 2em;
+    padding: 0;
+    border: 0;
+    border-radius: $border-radius;
+
+    // Code blocks are dark in both light and dark mode (the default
+    // skin's own syntax theme), so these are translucent white rather
+    // than the page's --color-* palette.
+    background: rgb(255 255 255 / 10%);
+    color: rgb(255 255 255 / 75%);
+    cursor: pointer;
+
+    &:hover,
+    &:focus-visible {
+        background: rgb(255 255 255 / 20%);
+        color: #fff;
+    }
+
+    &--copied {
+        opacity: 1;
+        color: #7fb8d8;
+    }
+
+    @media print {
+        display: none;
     }
 }

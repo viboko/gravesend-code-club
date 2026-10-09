@@ -1,7 +1,7 @@
 ---
 title: Rock! Paper! Scissors! Radio!
 layout: project
-date: 2026-10-01
+date: 2026-10-02
 tags: [micro:bit, project]
 excerpt: "Challenge a friend to Rock, Paper, Scissors! Your micro:bits send their choices to each other by radio and work out who won."
 ---

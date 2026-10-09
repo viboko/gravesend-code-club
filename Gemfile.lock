@@ -244,6 +244,7 @@ DEPENDENCIES
   jekyll-include-cache
   jekyll-remote-theme
   jekyll-sitemap
+  rubyzip (~> 3.2)
 
 BUNDLED WITH
    2.7.1
