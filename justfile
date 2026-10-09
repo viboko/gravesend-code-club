@@ -94,16 +94,3 @@ lint: lint-markdown lint-scss lint-js lint-html lint-seo
 # Remove build artifacts and caches
 clean:
 	rm -rf _site .jekyll-cache .lighthouseci
-
-# Rebuild the starter project zips in assets/zip from their sources in _downloads
-zip-downloads:
-	#!/usr/bin/env bash
-	set -euo pipefail
-	for dir in _downloads/*/*/; do
-		project=$(basename "$(dirname "$dir")")
-		name=$(basename "$dir")
-		mkdir -p "assets/zip/$project"
-		rm -f "assets/zip/$project/$name.zip"
-		(cd "_downloads/$project" && zip -q -X -r "../../assets/zip/$project/$name.zip" "$name" -x "*/.DS_Store" "*/__pycache__/*")
-		echo "assets/zip/$project/$name.zip"
-	done
