@@ -832,3 +832,58 @@ pre:has(> code.language-makecode) {
         color: var(--color-link-hover);
     }
 }
+
+/* Copy-to-clipboard button added to each ```python code block by
+   copy-code.js. `div.highlighter-rouge` is the outer wrapper kramdown
+   gives a fenced code block - the button is positioned against it rather
+   than `pre`, so it stays in the top-right corner even when the code
+   scrolls sideways. Hidden until the block is hovered or focused. */
+div.highlighter-rouge {
+    position: relative;
+
+    .copy-code-button {
+        opacity: 0;
+        transition: opacity 0.15s ease, background-color 0.15s ease, color 0.15s ease;
+    }
+
+    &:hover .copy-code-button,
+    &:focus-within .copy-code-button {
+        opacity: 1;
+    }
+}
+
+.copy-code-button {
+    position: absolute;
+    top: 0.5em;
+    inset-inline-end: 0.5em;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 2em;
+    height: 2em;
+    padding: 0;
+    border: 0;
+    border-radius: $border-radius;
+
+    // Code blocks are dark in both light and dark mode (the default
+    // skin's own syntax theme), so these are translucent white rather
+    // than the page's --color-* palette.
+    background: rgb(255 255 255 / 10%);
+    color: rgb(255 255 255 / 75%);
+    cursor: pointer;
+
+    &:hover,
+    &:focus-visible {
+        background: rgb(255 255 255 / 20%);
+        color: #fff;
+    }
+
+    &--copied {
+        opacity: 1;
+        color: #7fb8d8;
+    }
+
+    @media print {
+        display: none;
+    }
+}

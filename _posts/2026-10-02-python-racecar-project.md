@@ -8,6 +8,10 @@ excerpt: "Write a top-down racing game in Python with pygame. Drive a car round 
 
 <section markdown="1">
 
+<div class="callout callout--important" markdown="1">
+Important! Before you get started, make sure you have Python and pygame set up on your computer: [Set up Python and pygame]({% link _posts/2026-10-01-set-up-pygame.md %})
+</div>
+
 In this project you'll make a racing game in **Python**, using a library called **pygame**. You'll drive a car round a racetrack with the arrow keys, and make it crash into the red and white kerbs.
 
 If you've made the [Scratch version of Racecar]({% link _posts/2026-10-01-racecar-project.md %}), lots of this will feel familiar - it's the same game, just typed instead of built from blocks.
@@ -33,18 +37,9 @@ You'll get a folder called **racecar** with three files in it:
 * **racetrack.png** - the picture of the racetrack.
 * **car.png** - the picture of the car.
 
-To run Python code you need **Python** itself, plus the **pygame** library. The easiest way to get both is [Thonny](https://thonny.org){:target="_blank" rel="noopener noreferrer"}, a code editor made for people learning Python:
-
-1. Install Thonny and open it.
-2. Click **Tools** > **Manage packages...**, search for **pygame** and click **Install**.
-3. Click **File** > **Open...** and open **racecar.py** from the **racecar** folder.
-4. Click the green **Run** button (or press **F5**).
+Open **racecar.py** in Thonny, and click the green **Run** button (or press **F5**).
 
 A window should open, showing the racetrack with the car parked on the start line. It doesn't move yet - that's what you're going to code!
-
-<div class="callout callout--important" markdown="1">
-Already have Python installed and like using the terminal? Install pygame with `python3 -m pip install pygame` (on Windows, `py -m pip install pygame`), then run the game from inside the **racecar** folder with `python3 racecar.py` (or `py racecar.py`).
-</div>
 
 ---
 
