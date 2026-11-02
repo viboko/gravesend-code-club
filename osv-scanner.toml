@@ -63,3 +63,13 @@ reason = "Dev-only transitive dependency of @lhci/cli; no fixed version released
 id = "GHSA-238p-pmpm-9mq7" # katex, via markdownlint-cli -> markdownlint -> micromark-extension-math (pins ^0.16; fix is 0.18)
 ignoreUntil = 2027-01-05
 reason = "Dev-only transitive dependency of markdownlint, only run on our own Markdown; fix is outside the range its parent allows"
+
+[[IgnoredVulns]]
+id = "GHSA-g3hv-75wg-m249" # minimatch, via eslint, markdownlint-cli (~10.2.6) and pa11y-ci -> globby -> glob (^3.1.1); fix is 11.x
+ignoreUntil = 2027-01-05
+reason = "Dev-only transitive dependency of linting tooling, only fed our own glob patterns; fix is outside the ranges its parents allow"
+
+[[IgnoredVulns]]
+id = "GHSA-mrhx-c7xc-m3w5" # zod 3.x, via @lhci/cli -> lighthouse -> puppeteer-core -> chromium-bidi (^3.24.1); fix is 4.x (the zod 4.x copy under pa11y-ci is patched)
+ignoreUntil = 2027-01-05
+reason = "Dev-only transitive dependency of @lhci/cli, only validates messages from our own headless Chrome; fix is outside the range its parent allows"
