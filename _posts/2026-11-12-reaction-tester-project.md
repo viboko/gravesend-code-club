@@ -38,6 +38,8 @@ input.onButtonPressed(Button.AB, function () {
 })
 ```
 
+💡 **Tip**: the **set letter to** block starts off with a slot for a *number*, and typing **A** into it won't work, even with quote marks. To put text in it, click **Advanced**, then **Text**, and drag the first block (the one that looks like **" "**) into the slot. Then type **A** inside it. You'll need to do the same thing every time this project uses a letter, or an empty **""**.
+
 The **pause** block counts in *milliseconds*. There are **1000** milliseconds in a second, so this waits for somewhere between **1** and **5** seconds.
 
 Try it out in the simulator. Press **A+B**, wait, and a letter should appear.
@@ -80,6 +82,8 @@ basic.forever(function () {
     }
 })
 ```
+
+Remember to use a **Text** block for the **"A"** and **"B"** in the **=** blocks, and for the empty **""** in **set letter to**.
 
 If the letter is **A** and button **A** is being pressed, we work out the reaction time: what the stopwatch says now, take away what it said when the letter appeared. Then we set **letter** to **""**, because there's nothing left to press. It's the same for **B**.
 
