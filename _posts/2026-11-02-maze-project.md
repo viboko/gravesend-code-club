@@ -1,7 +1,7 @@
 ---
 title: Maze
 layout: project
-date: 2026-11-01
+date: 2026-11-02
 tags: [scratch, project]
 excerpt: "Build a maze game in Scratch where the computer draws a brand new random maze every time you play."
 ---
@@ -9,6 +9,8 @@ excerpt: "Build a maze game in Scratch where the computer draws a brand new rand
 <section markdown="1">
 
 Find your way through a maze using the arrow keys! You won't draw the maze yourself - you'll teach the computer to draw it for you, so there's a brand new maze every time you play.
+
+This is quite a long project. If you'd like a shorter maze game to start with, try [Draw Your Own Maze]({% link _posts/2026-11-01-draw-your-own-maze-project.md %}) first.
 
 ---
 
