@@ -163,6 +163,7 @@ The player needs to be small enough to fit through the maze, and it starts in th
 ```scratch
 when green flag clicked
 set size to (20) %
+go to [front v] layer
 go to x: (180) y: (140)
 forever
     if <key (right arrow v) pressed?> then
@@ -179,6 +180,8 @@ forever
     end
 end
 ```
+
+The **go to front layer** block makes sure the player is always drawn on top of everything else. You'll see why that matters later on!
 
 Try moving around with the arrow keys.
 
@@ -284,13 +287,100 @@ Now every time you win, you get a new maze to solve!
 </section>
 <section markdown="1">
 
+## 🌫️ Step 10: Add fog of war
+
+The maze is quite easy when you can see all of it at once. Let's cover it in fog, so you can only see the bit of the maze right next to the player!
+
+The fog is a sprite with a big black costume, with a see-through hole in the middle. Download the fog costume:
+
+<p>
+    <a href="/assets/img/maze-project/fog.svg" class="btn btn--large btn--primary" download>🌫️ Download the fog costume</a>
+</p>
+
+Then hover over the **Choose a Sprite** button, click **Upload Sprite**, and choose the **fog.svg** file you just downloaded. You'll get a new sprite called **fog**.
+
+Add this code to the fog sprite, so that the hole follows the player wherever it goes:
+
+```scratch
+when green flag clicked
+show
+forever
+    go to (player v)
+end
+```
+
+The costume is twice as wide and twice as tall as the stage, so it covers the whole stage wherever the player is - even in the corners. And because the player is in front of the fog (remember the **go to front layer** block?), you can always see it.
+
+But the goal is *behind* the fog, so now you have to go looking for it!
+
+* *Can you make the hole bigger or smaller? Hint: try a **set size** block in the fog's code. Don't make it too small, though - if the walls next to the player are hidden by the fog, the **touching color** blocks can't see them, and the player will walk straight through!*
+* *Can you make the fog start hidden, and only appear after you've solved your first maze?*
+
+---
+
+</section>
+<section markdown="1">
+
+## ⚡ Step 11: Draw the maze in a flash
+
+Watching the maze being drawn is fun the first time, but waiting for it soon gets boring. Let's make it draw instantly.
+
+You might know about **Turbo Mode**, which makes Scratch run code as fast as it can. It does make the maze draw instantly, but it also makes the **forever** loop in the player sprite run lots of times before the screen is redrawn, so the player shoots off down the corridor and smacks into the next wall! We only want the *maze drawing* to be super-fast, so we'll use a custom block instead.
+
+Go to the maze sprite. Click **My Blocks**, then **Make a Block**, and call it **draw maze**. Tick **Run without screen refresh**, then click **OK**.
+
+Now move all of the blocks underneath **when I receive new maze** into the new **define draw maze** block. Then put the **draw maze** block underneath **when I receive new maze**, like this:
+
+```scratch
+when I receive [new maze v]
+draw maze
+
+define draw maze
+hide
+erase all
+set pen color to (#7a3ff2)
+set pen size to (4)
+go to x: (-200) y: (-160)
+pen down
+go to x: (200) y: (-160)
+go to x: (200) y: (160)
+go to x: (-200) y: (160)
+go to x: (-200) y: (-160)
+pen up
+set [row v] to (0)
+repeat (7)
+    set [col v] to (0)
+    repeat (9)
+        go to x: ((-160) + ((col) * (40))) y: ((-120) + ((row) * (40)))
+        pen down
+        if <(pick random (1) to (2)) = (1)> then
+            change x by (-40)
+        else
+            change y by (-40)
+        end
+        pen up
+        change [col v] by (1)
+    end
+    change [row v] by (1)
+end
+```
+
+**Run without screen refresh** means Scratch runs the whole **draw maze** block before it redraws the screen, so the maze appears all at once. The player's code isn't in the custom block, so it carries on at its normal speed.
+
+* *Try unticking **Run without screen refresh** again (right-click the **define** block and choose **Edit**). Can you see the difference?*
+
+---
+
+</section>
+<section markdown="1">
+
 ## 🤔 Challenges
 
 * *Can you add a **mazes** variable which counts how many mazes you have solved?*
 * *Can you add a timer, so players can try to solve the maze as quickly as possible?*
 * *Can you play a sound when the player reaches the goal?*
 * *Swap the player and the goal over, so the player starts in the bottom-left corner. Is the maze easier or harder? Why?*
-* *The maze takes a couple of seconds to draw. Can you stop the player moving until it's finished?*
+* *What happens if you change **pick random 1 to 2** to **pick random 1 to 5**? Why?*
 * *Can you add an enemy that wanders around the maze, and sends you back to the start if it catches you?*
 * *Can you make the squares smaller so there are more of them? You'll need to change quite a few numbers!*
 * *What else can you think of?*

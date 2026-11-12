@@ -1,0 +1,1 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="960" height="720" viewBox="0 0 960 720"><defs><radialGradient id="hole" gradientUnits="userSpaceOnUse" cx="480" cy="360" r="75"><stop offset="0.7" stop-color="#000000" stop-opacity="0"/><stop offset="1" stop-color="#000000" stop-opacity="1"/></radialGradient></defs><rect width="960" height="720" fill="url(#hole)"/></svg>
