@@ -1,7 +1,7 @@
 ---
 title: Reaction Tester
 layout: project
-date: 2026-11-12
+date: 2026-11-03
 tags: [micro:bit, project]
 excerpt: "How fast are your reactions? Turn your micro:bit into a reaction tester that times how quickly you can press the right button."
 ---
@@ -38,7 +38,9 @@ input.onButtonPressed(Button.AB, function () {
 })
 ```
 
-💡 **Tip**: the **set letter to** block starts off with a slot for a *number*, and typing **A** into it won't work, even with quote marks. To put text in it, click **Advanced**, then **Text**, and drag the first block (the one that looks like **" "**) into the slot. Then type **A** inside it. You'll need to do the same thing every time this project uses a letter, or an empty **""**.
+<div class="callout callout--important" markdown="1">
+Tip! The **set letter to** block starts off with a slot for a *number*, and typing **A** into it won't work, even with quote marks. To put text in it, click **Advanced**, then **Text**, and drag the first block (the one that looks like **" "**) into the slot. Then type **A** inside it. You'll need to do the same thing every time this project uses a letter, or an empty **""**.
+</div>
 
 The **pause** block counts in *milliseconds*. There are **1000** milliseconds in a second, so this waits for somewhere between **1** and **5** seconds.
 
