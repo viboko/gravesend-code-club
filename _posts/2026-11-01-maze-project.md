@@ -1,7 +1,7 @@
 ---
 title: Maze
 layout: project
-date: 2026-10-12
+date: 2026-11-01
 tags: [scratch, project]
 excerpt: "Build a maze game in Scratch where the computer draws a brand new random maze every time you play."
 ---
