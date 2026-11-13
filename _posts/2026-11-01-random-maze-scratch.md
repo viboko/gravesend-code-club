@@ -161,4 +161,4 @@ You might know about **Turbo Mode**, which makes Scratch run *all* of your code 
 
 Your maze is ready! Go back to the [Maze]({% link _posts/2026-11-01-maze-project.md %}) project and carry on from **Step 2**.
 
-When you add the player, its start spot is at **x: 180, y: 140**.
+When you add the player, its start spot is at **x: 180, y: 140**. And look out for the tip in **Step 4**, which shows you how to get a brand new maze every time you reach the finish!

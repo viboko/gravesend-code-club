@@ -153,7 +153,7 @@ end
 
 ## 🏁 Step 4: Reach the finish
 
-When the player gets to the red finish, let's tell them how long they took.
+When the player gets to the red finish, let's tell them how long they took, then send them back to the start for another go.
 
 Scratch has a stopwatch built in, called the **timer**. You can find it in the **Sensing** blocks. Put a **reset timer** block just above the **forever** loop, so the timer starts from 0 every time you click the green flag:
 
@@ -166,16 +166,35 @@ reset timer
 forever
 ```
 
-Then add this inside the **forever** loop, underneath the last **if** block. Use the pipette again to pick the red from your finish:
+Then add this inside the **forever** loop, underneath the last **if** block. Use the pipette again to pick the red from your finish, and use the same numbers in the **go to x: y:** block as you did in Step 2:
 
 ```scratch
 if <touching color (#ef4444)?> then
-    say (join [You took ] (join (round (timer)) [ seconds!]))
-    stop [this script v]
+    say (join [You took ] (join (round (timer)) [ seconds!])) for (2) seconds
+    go to x: (210) y: (147)
+    reset timer
 end
 ```
 
-The **round** block (in **Operators**) gets rid of all the numbers after the decimal point. **stop this script** stops the **forever** loop, so the player can't move any more. Click the green flag to play again.
+The **round** block (in **Operators**) gets rid of all the numbers after the decimal point. After 2 seconds, the player goes back to the start and the timer starts again from 0, ready for another go.
+
+<div class="callout callout--important" markdown="1">
+Tip! Did you make the computer draw a random maze? Then you can get a brand new maze every time you reach the finish!
+
+Add a **broadcast** block underneath **reset timer**, and make a new message called **new maze**:
+
+```scratch
+broadcast (new maze v)
+```
+
+Then click on the **maze** sprite and add this script, so it draws a new maze when it gets the message:
+
+```scratch
+when I receive [new maze v]
+draw maze :: custom
+```
+
+</div>
 
 * *What's your best time? Can anyone at your table beat it?*
 
@@ -225,8 +244,8 @@ But the finish is *behind* the fog, so now you have to go looking for it!
 ## 🤔 Challenges
 
 * *Can you play a sound when the player reaches the finish?*
+* *Can you add a **mazes** variable which counts how many times you've reached the finish?*
 * *Drew or downloaded your maze? Add a second maze on a new backdrop, and use **next backdrop** to go to it when you reach the finish.*
-* *Used the random maze? When you reach the finish, can you draw a new maze and send the player back to the start, instead of stopping?*
 * *Can you add an enemy that wanders around the maze, and sends you back to the start if it catches you?*
 * *Swap mazes with a friend. Who can get through the other person's maze fastest?*
 * *What else can you think of?*
