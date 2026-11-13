@@ -10,6 +10,8 @@ excerpt: "Make a maze game in Scratch, then cover it in fog so you can only see 
 
 Find your way through a maze using the arrow keys! But watch out - the maze is covered in fog, so you can only see the bit right next to you. How fast can you get to the finish?
 
+{% include scratch-embed.html id="1439806054" %}
+
 ---
 
 </section>
@@ -23,7 +25,7 @@ First, you need a maze! There are four different ways to make one. Pick the one 
 <div class="option-list__item" markdown="1">
 ### Use the starter project 🚀
 
-Open the starter project at [scratch.mit.edu/projects/STARTER_PROJECT_ID](https://scratch.mit.edu/projects/STARTER_PROJECT_ID/editor){:target="_blank" rel="noopener noreferrer"} and click **Remix** to make your own copy. Don't forget to give it a new name!
+Open the starter project at [scratch.mit.edu/projects/1439809986](https://scratch.mit.edu/projects/1439809986/editor){:target="_blank" rel="noopener noreferrer"} and click **Remix** to make your own copy. Don't forget to give it a new name!
 
 The starter project already has a maze backdrop, a **player** sprite and a **fog** sprite, so you can get straight on with the code. This is the quickest way to start.
 </div>
