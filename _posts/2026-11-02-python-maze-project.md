@@ -1,7 +1,7 @@
 ---
 title: Maze in Python
 layout: project
-date: 2026-11-03
+date: 2026-11-02
 tags: [python, project]
 excerpt: "Write a maze game in Python with pygame. The computer makes a brand new random maze every time you play - and then hides it in fog!"
 ---
@@ -14,7 +14,9 @@ Important! Before you get started, make sure you have Python and pygame set up o
 
 In this project you'll make a maze game in **Python**, using a library called **pygame**. You won't design the maze yourself - you'll teach the computer how to make one, so there's a brand new maze every time you play. Then you'll find your way through it with the arrow keys.
 
-If you've made the [Scratch version of Maze]({% link _posts/2026-11-02-maze-project.md %}), lots of this will feel familiar - it's the same game, and even the same way of making the maze, just typed instead of built from blocks.
+If you've made the [Scratch version of Maze]({% link _posts/2026-11-01-maze-project.md %}), lots of this will feel familiar - it's the same game, just typed instead of built from blocks.
+
+And if you followed [Draw a random maze in Scratch]({% link _posts/2026-11-01-random-maze-scratch.md %}), Python makes the maze in exactly the same way.
 
 Don't worry if you've never written Python before. Each step tells you exactly what to type, and where.
 

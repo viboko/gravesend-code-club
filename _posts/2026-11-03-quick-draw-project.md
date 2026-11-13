@@ -1,7 +1,7 @@
 ---
 title: Quick Draw
 layout: project
-date: 2026-11-04
+date: 2026-11-03
 tags: [micro:bit, project]
 excerpt: "A two-player reaction game for the micro:bit. Wait for the heart, then be the first to press your button - but don't press too early!"
 ---
