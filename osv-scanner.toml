@@ -50,6 +50,16 @@ ignoreUntil = 2027-01-05
 reason = "Dev-only transitive dependency of @lhci/cli; fix needs a major bump get-uri doesn't allow"
 
 [[IgnoredVulns]]
+id = "GHSA-5pm8-86m8-9m6r" # basic-ftp, via @lhci/cli -> proxy-agent -> get-uri (pins ^5, even in get-uri 8.0.1; fix is 6.2.4)
+ignoreUntil = 2027-01-05
+reason = "Dev-only transitive dependency of @lhci/cli; fix needs a major bump get-uri doesn't allow"
+
+[[IgnoredVulns]]
+id = "GHSA-r4jh-29pc-gfqr" # basic-ftp, via @lhci/cli -> proxy-agent -> get-uri (pins ^5, even in get-uri 8.0.1; fix is 6.2.3)
+ignoreUntil = 2027-01-05
+reason = "Dev-only transitive dependency of @lhci/cli; fix needs a major bump get-uri doesn't allow"
+
+[[IgnoredVulns]]
 id = "GHSA-vfj7-8cjw-p6xm" # braces, via stylelint -> micromatch
 ignoreUntil = 2027-01-05
 reason = "Dev-only transitive dependency of stylelint, only fed our own glob patterns; no fixed version released"
